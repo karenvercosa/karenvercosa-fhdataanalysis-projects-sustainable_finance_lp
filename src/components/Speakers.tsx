@@ -14,10 +14,10 @@ export function Speakers() {
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">Quem você vai encontrar</p>
-          <h2 className="mt-4 font-heading text-3xl text-brand-900 sm:text-4xl">Palestrantes que movem o mercado</h2>
+          <h2 className="mt-4 font-heading text-3xl text-brand-900 sm:text-4xl">Keynote Speakers</h2>
           <p className="mt-4 text-lg text-ink-600">
-            Lideranças do capital, do agro, da regulação e da tecnologia que estão construindo a transição verde na
-            prática.
+            Líderes globais da economia, da regulação climática e do mercado financeiro confirmados para o palco
+            principal.
           </p>
         </div>
 
@@ -30,8 +30,7 @@ export function Speakers() {
               <Avatar name={s.name} />
               <div className="p-4 sm:p-6">
                 <h3 className="font-heading text-lg text-brand-900">{s.name}</h3>
-                <p className="mt-1 text-sm text-ink-600">{s.role}</p>
-                <p className="mt-2 text-sm font-semibold text-brand-500">{s.company}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.role}</p>
               </div>
             </article>
           ))}

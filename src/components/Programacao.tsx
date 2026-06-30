@@ -1,108 +1,66 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
-import { SCHEDULE } from "@/data/content";
-
-type Turn = keyof typeof SCHEDULE;
-const TURNS = Object.keys(SCHEDULE) as Turn[];
+import { useState } from "react";
+import { ChevronDown, Leaf } from "lucide-react";
+import { TRILHAS } from "@/data/content";
 
 export function Programacao() {
-  const [active, setActive] = useState<Turn>("manha");
-  const listRef = useRef<HTMLDivElement>(null);
-  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
-
-  // Move o indicador para a aba ativa (após layout/fontes)
-  useLayoutEffect(() => {
-    const btn = listRef.current?.querySelector<HTMLButtonElement>(`#tab-${active}`);
-    if (btn) setIndicator({ left: btn.offsetLeft, width: btn.offsetWidth });
-  }, [active]);
-
-  function onKeyDown(e: React.KeyboardEvent) {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    e.preventDefault();
-    const i = TURNS.indexOf(active);
-    const dir = e.key === "ArrowRight" ? 1 : -1;
-    const next = TURNS[(i + dir + TURNS.length) % TURNS.length];
-    setActive(next);
-    listRef.current?.querySelector<HTMLButtonElement>(`#tab-${next}`)?.focus();
-  }
+  // Accordion de trilhas — independentes; a primeira abre por padrão.
+  const [open, setOpen] = useState<Record<number, boolean>>({ 1: true });
+  const toggle = (n: number) => setOpen((s) => ({ ...s, [n]: !s[n] }));
 
   return (
     <section id="programacao" className="bg-brand-900 py-20 text-white lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">Programação</p>
-          <h2 className="mt-4 font-heading text-3xl text-white sm:text-4xl">Um dia inteiro, três turnos de imersão</h2>
+          <h2 className="mt-4 font-heading text-3xl text-white sm:text-4xl">Trilhas de conteúdo</h2>
           <p className="mt-4 text-lg text-ink-200">
-            Alterne entre os turnos e veja painéis, horários e palestrantes. Conteúdo curado em trilhas temáticas
-            complementares.
+            Quatro trilhas temáticas cobrindo capital, regulação, inovação, descarbonização e bioeconomia. Toque para
+            explorar os painéis de cada uma.
           </p>
         </div>
 
-        <div className="reveal mt-12">
-          {/* Triggers */}
-          <div
-            ref={listRef}
-            role="tablist"
-            aria-label="Turnos do evento"
-            onKeyDown={onKeyDown}
-            className="relative inline-flex rounded-lg border border-white/15 bg-brand-700/50 p-1"
-          >
-            <span
-              aria-hidden
-              className="absolute bottom-1 top-1 rounded-md bg-brand-subtle transition-all duration-300 ease-out"
-              style={{ left: indicator.left, width: indicator.width }}
-            />
-            {TURNS.map((t) => {
-              const selected = t === active;
-              return (
+        <div className="reveal mt-12 space-y-4">
+          {TRILHAS.map((trilha) => {
+            const isOpen = !!open[trilha.n];
+            return (
+              <div key={trilha.n} className="overflow-hidden rounded-lg border border-white/10 bg-brand-700/40">
                 <button
-                  key={t}
-                  id={`tab-${t}`}
-                  role="tab"
-                  aria-selected={selected}
-                  aria-controls={`panel-${t}`}
-                  tabIndex={selected ? 0 : -1}
-                  onClick={() => setActive(t)}
-                  className={`relative z-10 rounded-md px-5 py-3 text-sm font-semibold transition-colors sm:px-8 ${
-                    selected ? "text-brand-900" : "text-white/70 hover:text-white"
-                  }`}
+                  type="button"
+                  onClick={() => toggle(trilha.n)}
+                  aria-expanded={isOpen}
+                  className="flex w-full items-center gap-4 p-6 text-left transition-colors hover:bg-brand-700/60"
                 >
-                  {SCHEDULE[t].emoji} {SCHEDULE[t].label}
+                  <span className="grid size-10 shrink-0 place-items-center rounded-md bg-brand-subtle text-brand-900">
+                    <Leaf className="size-5" strokeWidth={2} aria-hidden />
+                  </span>
+                  <span className="flex-1">
+                    <span className="text-sm font-semibold text-brand-subtle">Trilha {trilha.n}</span>
+                    <span className="block font-heading text-lg text-white sm:text-xl">{trilha.title}</span>
+                  </span>
+                  <ChevronDown
+                    className={`size-5 shrink-0 text-brand-subtle transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    strokeWidth={2}
+                    aria-hidden
+                  />
                 </button>
-              );
-            })}
-          </div>
 
-          {/* Painéis */}
-          <div className="relative mt-8">
-            {TURNS.map((t) => (
-              <div
-                key={t}
-                role="tabpanel"
-                id={`panel-${t}`}
-                aria-labelledby={`tab-${t}`}
-                hidden={t !== active}
-                className="space-y-4 transition-opacity duration-300"
-              >
-                {SCHEDULE[t].sessions.map((s) => (
-                  <div
-                    key={s.time + s.title}
-                    className="flex flex-col gap-4 rounded-lg border border-white/10 bg-brand-700/40 p-6 transition-colors hover:border-brand-subtle/60 sm:flex-row sm:items-center"
-                  >
-                    <span className="inline-flex shrink-0 items-center justify-center rounded-md bg-brand-subtle/15 px-4 py-2 font-heading font-bold text-brand-subtle">
-                      {s.time}
-                    </span>
-                    <div className="flex-1">
-                      <h3 className="font-heading text-lg text-white">{s.title}</h3>
-                      {s.track && <p className="mt-1 text-sm text-ink-200">{s.track}</p>}
-                      {s.speakers && <p className="mt-2 text-sm text-brand-subtle">{s.speakers}</p>}
-                    </div>
+                <div className="acc-panel" data-open={isOpen}>
+                  <div>
+                    <ul className="space-y-4 px-6 pb-6 sm:pl-20">
+                      {trilha.topics.map((t) => (
+                        <li key={t.title} className="border-l-2 border-brand-subtle/40 pl-4">
+                          <h3 className="font-heading text-base text-white">{t.title}</h3>
+                          <p className="mt-1 text-sm leading-relaxed text-ink-200">{t.text}</p>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                ))}
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -8,6 +8,7 @@ import { Host } from "@/components/Host";
 import { Audience } from "@/components/Audience";
 import { Inscricao } from "@/components/Inscricao";
 import { Sponsors } from "@/components/Sponsors";
+import { Support } from "@/components/Support";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -33,6 +34,7 @@ export default function Page() {
         <Audience />
         <Inscricao />
         <Sponsors />
+        <Support />
         <Faq />
       </main>
       <Footer />
