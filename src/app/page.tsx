@@ -1,0 +1,38 @@
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { Opportunity } from "@/components/Opportunity";
+import { Programacao } from "@/components/Programacao";
+import { Speakers } from "@/components/Speakers";
+import { Audience } from "@/components/Audience";
+import { Inscricao } from "@/components/Inscricao";
+import { Sponsors } from "@/components/Sponsors";
+import { Faq } from "@/components/Faq";
+import { Footer } from "@/components/Footer";
+import { ScrollReveal } from "@/components/ScrollReveal";
+
+export default function Page() {
+  return (
+    <>
+      <a
+        href="#programacao"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-subtle focus:px-4 focus:py-2 focus:text-brand-900"
+      >
+        Pular para a programação
+      </a>
+
+      <Header />
+      <main>
+        <Hero />
+        <Opportunity />
+        <Programacao />
+        <Speakers />
+        <Audience />
+        <Inscricao />
+        <Sponsors />
+        <Faq />
+      </main>
+      <Footer />
+      <ScrollReveal />
+    </>
+  );
+}
