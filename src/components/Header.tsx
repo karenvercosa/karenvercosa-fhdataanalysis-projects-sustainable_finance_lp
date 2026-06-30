@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { LogIn, Menu, X } from "lucide-react";
 
 const LINKS = [
-  { href: "#oportunidade", label: "Sobre" },
+  { href: "#sobre-evento", label: "Sobre" },
   { href: "#programacao", label: "Conteúdo" },
   { href: "#palestrantes", label: "Palestrantes" },
+  { href: "#conducao", label: "Condução" },
   { href: "#publico", label: "Para quem é" },
   { href: "#faq", label: "FAQ" },
 ];

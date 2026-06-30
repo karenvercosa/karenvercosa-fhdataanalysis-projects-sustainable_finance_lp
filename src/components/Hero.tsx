@@ -18,7 +18,7 @@ export function Hero() {
           {/* Chapéu */}
           <p className="inline-flex items-center gap-2 rounded-full border border-brand-subtle/40 bg-brand-subtle/10 px-4 py-2 text-sm font-medium text-brand-subtle">
             <span className="size-2 animate-pulseDot rounded-full bg-brand-subtle" />
-            O futuro é agora · Goiânia 2026
+            2ª edição · Goiânia 2026
           </p>
 
           {/* Headline */}

@@ -9,6 +9,8 @@ import {
   Landmark,
   Sprout,
   FileCheck2,
+  Briefcase,
+  HeartHandshake,
   type LucideIcon,
 } from "lucide-react";
 import type { IconName } from "@/data/content";
@@ -24,6 +26,8 @@ const MAP: Record<IconName, LucideIcon> = {
   bank: Landmark,
   sprout: Sprout,
   fileCheck: FileCheck2,
+  briefcase: Briefcase,
+  handshake: HeartHandshake,
 };
 
 export function Icon({ name, className }: { name: IconName; className?: string }) {

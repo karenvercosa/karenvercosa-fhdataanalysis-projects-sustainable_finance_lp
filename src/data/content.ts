@@ -26,7 +26,9 @@ export type IconName =
   | "rocket"
   | "bank"
   | "sprout"
-  | "fileCheck";
+  | "fileCheck"
+  | "briefcase"
+  | "handshake";
 
 export const PILLARS: { icon: IconName; title: string; text: string }[] = [
   { icon: "trending", title: "Acesso a capital verde", text: "Conecte projetos a fundos, green bonds e investidores que buscam ativos com tese ESG sólida." },
@@ -80,13 +82,38 @@ export const SPEAKERS: Speaker[] = [
 ];
 
 export const AUDIENCE: { icon: IconName; title: string; text: string }[] = [
-  { icon: "building", title: "Diretores de Sustentabilidade & ESG", text: "Que precisam traduzir metas em estratégia financeira." },
-  { icon: "coins", title: "Investidores & Gestores", text: "Buscando ativos verdes com retorno e tese sólida." },
-  { icon: "rocket", title: "Fundadores de Startups", text: "De climatech, agtech e fintech verde em busca de capital." },
-  { icon: "bank", title: "Executivos do Setor Financeiro", text: "Bancos, seguradoras e cooperativas estruturando produtos verdes." },
-  { icon: "sprout", title: "Líderes do Agronegócio", text: "Que querem monetizar práticas sustentáveis e crédito de carbono." },
-  { icon: "fileCheck", title: "Gestores Públicos & Reguladores", text: "Definindo políticas e marcos para a economia de baixo carbono." },
+  { icon: "briefcase", title: "Executivos e tomadores de decisão (C-Level)", text: "De grandes corporações e instituições financeiras." },
+  { icon: "coins", title: "Investidores e fundos de Venture Capital", text: "Buscando oportunidades alinhadas a impacto e sustentabilidade." },
+  { icon: "rocket", title: "Startups e empresas de tecnologia", text: "Trazendo inovação para o setor financeiro e corporativo." },
+  { icon: "sprout", title: "Produtores rurais", text: "Interessados em novas formas de financiamento, participantes de programas ou que receberão reconhecimentos." },
+  { icon: "bank", title: "Organizações governamentais e reguladores", text: "Essenciais para a criação de políticas e incentivos para o crescimento do setor." },
+  { icon: "handshake", title: "ONGs e entidades do terceiro setor", text: "Com papel fundamental na conexão entre capital e impacto social." },
 ];
+
+// "Tudo o que está por vir" — consolidação do SFS (2ª edição)
+export const CONSOLIDATION = {
+  eyebrow: "2ª edição",
+  title: "Consolidação do SFS como o mais importante evento sobre Finanças Sustentáveis do Centro-Oeste.",
+  bullets: [
+    "Diversificação das trilhas de conteúdo",
+    "Ampliação das experiências",
+    "Novos keynote speakers",
+    "Módulo internacional",
+  ],
+  highlights: ["Palestras inspiradoras", "Debates enriquecedores", "Networking"],
+  value: [
+    "Amplie seu networking e gere negócios conectando-se a um público altamente qualificado.",
+    "Aprenda, inspire-se e gere valor.",
+    "Viva a segunda edição do mais importante evento do setor no Centro-Oeste.",
+  ],
+};
+
+// Condução / Mestre de cerimônias
+export const HOST = {
+  name: "Vanessa Cochi",
+  role: "Jornalista, apresentadora e mestre de cerimônias",
+  bio: "O evento será conduzido pela jornalista, apresentadora e mestre de cerimônias Vanessa Cochi, que traz ampla experiência em eventos importantes, aliando a experiência nas mídias tradicionais à agilidade dos novos meios de comunicação.",
+};
 
 export const SPONSORS = ["VerdeCapital", "Banco Cerrado", "CarbonIQ", "AgroData", "Atlântica Asset", "EcoMercado"];
 

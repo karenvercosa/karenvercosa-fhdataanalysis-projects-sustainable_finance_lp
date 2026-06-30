@@ -1,8 +1,10 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Opportunity } from "@/components/Opportunity";
+import { Consolidation } from "@/components/Consolidation";
 import { Programacao } from "@/components/Programacao";
 import { Speakers } from "@/components/Speakers";
+import { Host } from "@/components/Host";
 import { Audience } from "@/components/Audience";
 import { Inscricao } from "@/components/Inscricao";
 import { Sponsors } from "@/components/Sponsors";
@@ -24,8 +26,10 @@ export default function Page() {
       <main>
         <Hero />
         <Opportunity />
+        <Consolidation />
         <Programacao />
         <Speakers />
+        <Host />
         <Audience />
         <Inscricao />
         <Sponsors />
