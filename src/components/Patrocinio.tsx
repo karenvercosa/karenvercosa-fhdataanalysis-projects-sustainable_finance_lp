@@ -1,4 +1,4 @@
-import { ArrowRight, AlertTriangle, Megaphone, Handshake, FileText } from "lucide-react";
+import { ArrowRight, AlertTriangle, Megaphone, Handshake } from "lucide-react";
 import { SPONSOR_MAILTO } from "@/data/content";
 
 export function Patrocinio() {
@@ -50,22 +50,13 @@ export function Patrocinio() {
 
         {/* CTA principal */}
         <div className="reveal mt-12 flex flex-col items-center gap-4">
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <a
-              href={SPONSOR_MAILTO}
-              className="inline-flex items-center justify-center gap-3 rounded-md bg-brand-subtle px-10 py-5 text-lg font-bold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
-            >
-              Quero ser patrocinador
-              <ArrowRight className="size-6" strokeWidth={2.4} />
-            </a>
-            <a
-              href={SPONSOR_MAILTO}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-brand-subtle px-8 py-5 text-lg font-semibold text-brand-subtle transition-colors hover:bg-brand-subtle/10"
-            >
-              <FileText className="size-5" strokeWidth={2} />
-              Receber o mídia kit
-            </a>
-          </div>
+          <a
+            href={SPONSOR_MAILTO}
+            className="inline-flex items-center justify-center gap-3 rounded-md bg-brand-subtle px-10 py-5 text-lg font-bold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
+          >
+            Quero ser patrocinador
+            <ArrowRight className="size-6" strokeWidth={2.4} />
+          </a>
           <p className="text-sm text-ink-200">Retorno em até 1 dia útil · Cotas e ativações sob medida para sua marca</p>
         </div>
       </div>

@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FileText, Menu, X } from "lucide-react";
-import { SPONSOR_MAILTO } from "@/data/content";
+import { Menu, X } from "lucide-react";
 
 const LINKS = [
   { href: "#sobre-evento", label: "Sobre" },
@@ -49,12 +48,6 @@ export function Header() {
 
           {/* Ações */}
           <div className="flex items-center gap-3">
-            <a
-              href={SPONSOR_MAILTO}
-              className="hidden items-center gap-2 rounded-sm border border-brand-subtle px-4 py-2 text-sm font-medium text-brand-subtle transition-colors hover:bg-brand-subtle/10 sm:inline-flex"
-            >
-              <FileText className="size-4" strokeWidth={2} aria-hidden /> Mídia kit
-            </a>
             <a
               href="#patrocinio"
               className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-brand-subtle px-3 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-colors hover:bg-white sm:px-4"

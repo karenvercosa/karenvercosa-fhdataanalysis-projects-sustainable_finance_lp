@@ -23,7 +23,7 @@ Landing page institucional e de alta conversão do evento **Sustainable Finance 
 7. Público qualificado — quem a marca do patrocinador alcança
 8. Por que apoiar o SFS 2026 — motivos para patrocinar
 9. Apoio Institucional — esteira de logos
-10. Patrocínio — área crítica de conversão (cotas + mídia kit + contato comercial)
+10. Patrocínio — área crítica de conversão (cotas + contato comercial)
 11. FAQ de patrocínio (accordion) + Rodapé (LGPD)
 
 ## Desenvolvimento

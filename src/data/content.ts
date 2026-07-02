@@ -13,7 +13,7 @@ export const EVENT = {
 export const SPONSOR_MAILTO = `mailto:${EVENT.sponsorEmail}?subject=${encodeURIComponent(
   "Quero ser patrocinador do SFS 2026"
 )}&body=${encodeURIComponent(
-  "Olá! Temos interesse em patrocinar o Sustainable Finance Summit 2026. Poderiam enviar o mídia kit com as cotas e formatos de ativação?"
+  "Olá! Temos interesse em patrocinar o Sustainable Finance Summit 2026. Poderiam enviar mais informações sobre as cotas e os formatos de ativação?"
 )}`;
 
 export const METRICS = [
@@ -145,9 +145,9 @@ export const SUPPORT: { icon: IconName; title: string; text: string }[] = [
 export const SPONSORS = ["VerdeCapital", "Banco Cerrado", "CarbonIQ", "AgroData", "Atlântica Asset", "EcoMercado"];
 
 export const FAQ: { q: string; a: string }[] = [
-  { q: "Quais são as cotas de patrocínio disponíveis?", a: "Trabalhamos com cotas em diferentes níveis de investimento e visibilidade — de apoio a master — com formatos de ativação sob medida para os objetivos da sua marca. Solicite o mídia kit para ver valores e contrapartidas de cada cota." },
+  { q: "Quais são as cotas de patrocínio disponíveis?", a: "Trabalhamos com cotas em diferentes níveis de investimento e visibilidade — de apoio a master — com formatos de ativação sob medida para os objetivos da sua marca. Fale com o time comercial para ver valores e contrapartidas de cada cota." },
   { q: "O que está incluído em uma cota de patrocínio?", a: "Conforme o nível da cota: presença da marca nos materiais e no palco, espaço para estande ou ativação, ingressos de cortesia para o seu time, participação em painéis e exposição nos canais dos parceiros de mídia do evento." },
   { q: "Que público a minha marca vai alcançar?", a: "Executivos e tomadores de decisão (C-level), investidores e fundos de Venture Capital, produtores rurais, startups, governo e terceiro setor — além de alcance nacional por meio dos parceiros de mídia que dão dimensão ao evento." },
   { q: "O patrocínio dá direito a palestra ou painel?", a: "Sim, dependendo da cota. As cotas superiores incluem espaço de conteúdo (keynote, painel ou masterclass) alinhado à curadoria das trilhas temáticas do evento." },
-  { q: "Como recebo o mídia kit e fecho o patrocínio?", a: "Clique em “Quero ser patrocinador” ou fale com o time comercial. Enviamos o mídia kit completo, apresentamos as cotas e conduzimos a proposta de acordo com os objetivos e o orçamento da sua marca." },
+  { q: "Como faço para fechar o patrocínio?", a: "Clique em “Quero ser patrocinador” ou fale com o time comercial. Apresentamos as cotas e conduzimos a proposta de acordo com os objetivos e o orçamento da sua marca." },
 ];
