@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { LogIn, Menu, X } from "lucide-react";
 
 const LINKS = [
   { href: "#sobre-evento", label: "Sobre" },
@@ -49,11 +49,17 @@ export function Header() {
           {/* Ações */}
           <div className="flex items-center gap-3">
             <a
-              href="#patrocinio"
+              href="#"
+              className="hidden items-center gap-2 rounded-sm border border-brand-subtle px-4 py-2 text-sm font-medium text-brand-subtle transition-colors hover:bg-brand-subtle/10 sm:inline-flex"
+            >
+              <LogIn className="size-4" strokeWidth={2} aria-hidden /> Entrar
+            </a>
+            <a
+              href="#ingressos"
               className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-brand-subtle px-3 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-colors hover:bg-white sm:px-4"
             >
-              <span className="sm:hidden">Patrocinar</span>
-              <span className="hidden sm:inline">Quero ser patrocinador</span>
+              <span className="sm:hidden">Ingressos</span>
+              <span className="hidden sm:inline">Comprar ingressos</span>
             </a>
             <button
               type="button"
@@ -82,11 +88,11 @@ export function Header() {
                 </a>
               ))}
               <a
-                href="#patrocinio"
+                href="#ingressos"
                 onClick={() => setOpen(false)}
-                className="mt-2 rounded-sm border border-brand-subtle px-3 py-3 text-center font-medium text-brand-subtle"
+                className="mt-2 rounded-sm bg-brand-subtle px-3 py-3 text-center font-semibold text-brand-900"
               >
-                Quero ser patrocinador
+                Comprar ingressos
               </a>
             </div>
           </div>

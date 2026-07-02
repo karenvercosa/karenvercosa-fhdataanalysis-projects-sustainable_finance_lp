@@ -26,7 +26,7 @@ export function Footer() {
           <nav className="text-sm">
             <h3 className="font-heading text-white">Institucional</h3>
             <ul className="mt-4 space-y-3">
-              <li><a href="#patrocinio" className="transition-colors hover:text-brand-subtle">Seja um patrocinador</a></li>
+              <li><a href="#ingressos" className="transition-colors hover:text-brand-subtle">Comprar ingressos</a></li>
               <li><a href="#faq" className="transition-colors hover:text-brand-subtle">Perguntas frequentes</a></li>
               <li><a href="#" className="transition-colors hover:text-brand-subtle">Política de Privacidade</a></li>
               <li><a href="#" className="transition-colors hover:text-brand-subtle">Conformidade LGPD</a></li>
@@ -34,9 +34,9 @@ export function Footer() {
           </nav>
 
           <div className="text-sm">
-            <h3 className="font-heading text-white">Contato comercial</h3>
+            <h3 className="font-heading text-white">Contato</h3>
             <ul className="mt-4 space-y-3">
-              <li><a href={`mailto:${EVENT.sponsorEmail}`} className="transition-colors hover:text-brand-subtle">{EVENT.sponsorEmail}</a></li>
+              <li><a href={`mailto:${EVENT.salesEmail}`} className="transition-colors hover:text-brand-subtle">{EVENT.salesEmail}</a></li>
               <li>{EVENT.venue}</li>
               <li>{EVENT.city}</li>
             </ul>

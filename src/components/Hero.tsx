@@ -64,16 +64,16 @@ export function Hero() {
           {/* CTAs */}
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
-              href="#patrocinio"
+              href="#ingressos"
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
             >
-              Quero ser patrocinador <ArrowRight className="size-5" strokeWidth={2.2} />
+              Comprar ingressos <ArrowRight className="size-5" strokeWidth={2.2} />
             </a>
             <a
-              href="#sobre-evento"
+              href="#programacao"
               className="inline-flex items-center justify-center gap-2 rounded-sm border border-brand-subtle px-8 py-4 text-base font-semibold text-brand-subtle transition-colors hover:bg-brand-subtle/10"
             >
-              Conhecer o evento
+              Ver programação
             </a>
           </div>
         </div>

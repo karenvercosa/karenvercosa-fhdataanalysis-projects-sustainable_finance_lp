@@ -6,13 +6,13 @@ export function Audience() {
     <section id="publico" className="bg-ink-0 py-20 lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">Público qualificado</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">Para quem é</p>
           <h2 className="mt-4 font-heading text-3xl text-brand-900 sm:text-4xl">
-            O público que sua marca vai impactar
+            Feito para quem decide a transição verde
           </h2>
           <p className="mt-4 text-lg text-ink-600">
-            Ao patrocinar o SFS 2026, sua marca se conecta diretamente com os decisores que movimentam a economia verde
-            do Centro-Oeste.
+            Se você toma decisões de capital, risco, regulação ou inovação, este é o evento — e o ingresso — certo para
+            você.
           </p>
         </div>
 

@@ -6,14 +6,15 @@ export const EVENT = {
   time: "08h30 às 21h00",
   venue: "Centro Cultural Oscar Niemeyer",
   city: "Goiânia · GO · Brasil",
-  sponsorEmail: "comercial@sustainablefinance.com.br",
+  ticketsUrl: "#", // TODO: link do checkout de ingressos (ex.: Sympla/Eventbrite)
+  salesEmail: "comercial@sustainablefinance.com.br", // lotes corporativos
 };
 
-// Link padrão para conversão de patrocínio (mailto com assunto pré-preenchido)
-export const SPONSOR_MAILTO = `mailto:${EVENT.sponsorEmail}?subject=${encodeURIComponent(
-  "Quero ser patrocinador do SFS 2026"
+// Contato comercial para compra de lote de ingressos (mailto pré-preenchido)
+export const LOTE_MAILTO = `mailto:${EVENT.salesEmail}?subject=${encodeURIComponent(
+  "Compra de lote de ingressos — SFS 2026"
 )}&body=${encodeURIComponent(
-  "Olá! Temos interesse em patrocinar o Sustainable Finance Summit 2026. Poderiam enviar mais informações sobre as cotas e os formatos de ativação?"
+  "Olá! Temos interesse em adquirir um lote de ingressos para o Sustainable Finance Summit 2026. Poderiam enviar as condições para grupos/empresas?"
 )}`;
 
 export const METRICS = [
@@ -134,20 +135,20 @@ export const HOST = {
   bio: "O evento será conduzido pela jornalista, apresentadora e mestre de cerimônias Vanessa Cochi, que traz ampla experiência em eventos importantes, aliando a experiência nas mídias tradicionais à agilidade dos novos meios de comunicação.",
 };
 
-// Por que apoiar o SFS 2026 (foco em parceiros/patrocinadores)
+// Por que participar do SFS 2026 (motivos para ir ao evento)
 export const SUPPORT: { icon: IconName; title: string; text: string }[] = [
   { icon: "building", title: "Capital do Centro-Oeste", text: "Vivencie a capital do Centro-Oeste brasileiro, região do país com as maiores perspectivas econômico-financeiras." },
   { icon: "handshake", title: "Networking & novos negócios", text: "Ambiente desenhado estrategicamente para networking e geração de novos negócios." },
-  { icon: "trending", title: "Visibilidade de marca", text: "O evento contará com parceiros de mídia que darão dimensão nacional à sua marca." },
+  { icon: "trending", title: "Alcance nacional", text: "O evento conta com parceiros de mídia que dão dimensão nacional à programação." },
   { icon: "layers", title: "Conhecimento", text: "Participe de uma agenda emergencial e multissetorial." },
 ];
 
 export const SPONSORS = ["VerdeCapital", "Banco Cerrado", "CarbonIQ", "AgroData", "Atlântica Asset", "EcoMercado"];
 
 export const FAQ: { q: string; a: string }[] = [
-  { q: "Quais são as cotas de patrocínio disponíveis?", a: "Trabalhamos com cotas em diferentes níveis de investimento e visibilidade — de apoio a master — com formatos de ativação sob medida para os objetivos da sua marca. Fale com o time comercial para ver valores e contrapartidas de cada cota." },
-  { q: "O que está incluído em uma cota de patrocínio?", a: "Conforme o nível da cota: presença da marca nos materiais e no palco, espaço para estande ou ativação, ingressos de cortesia para o seu time, participação em painéis e exposição nos canais dos parceiros de mídia do evento." },
-  { q: "Que público a minha marca vai alcançar?", a: "Executivos e tomadores de decisão (C-level), investidores e fundos de Venture Capital, produtores rurais, startups, governo e terceiro setor — além de alcance nacional por meio dos parceiros de mídia que dão dimensão ao evento." },
-  { q: "O patrocínio dá direito a palestra ou painel?", a: "Sim, dependendo da cota. As cotas superiores incluem espaço de conteúdo (keynote, painel ou masterclass) alinhado à curadoria das trilhas temáticas do evento." },
-  { q: "Como faço para fechar o patrocínio?", a: "Clique em “Quero ser patrocinador” ou fale com o time comercial. Apresentamos as cotas e conduzimos a proposta de acordo com os objetivos e o orçamento da sua marca." },
+  { q: "Como compro meu ingresso?", a: "Clique em “Comprar ingressos”, escolha o tipo de ingresso e finalize o pagamento com segurança. Você recebe a confirmação e o ingresso por e-mail logo após a compra." },
+  { q: "Posso comprar um lote de ingressos para a minha empresa?", a: "Sim. Oferecemos lotes de ingressos para empresas e equipes, com condições especiais por volume. Fale com o time comercial pelo botão “Comprar lote” para receber uma proposta." },
+  { q: "O ingresso dá direito a quê?", a: "O ingresso garante o acesso presencial ao evento no Centro Cultural Oscar Niemeyer, às trilhas de conteúdo e à transmissão dos painéis. As condições completas são exibidas na hora da compra." },
+  { q: "O evento emite certificado?", a: "Sim. Todos os participantes recebem certificado digital de participação, disponibilizado após o encerramento, com a carga horária das trilhas acompanhadas." },
+  { q: "Como funcionam os reembolsos?", a: "O cancelamento e o reembolso seguem o Código de Defesa do Consumidor: solicitações feitas em até 7 dias após a compra são reembolsadas integralmente, respeitada a antecedência em relação à data do evento." },
 ];

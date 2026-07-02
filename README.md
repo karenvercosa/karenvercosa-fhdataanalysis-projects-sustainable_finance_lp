@@ -12,19 +12,19 @@ Landing page institucional e de alta conversão do evento **Sustainable Finance 
 
 ## Seções
 
-> Foco de conversão: **captação de patrocinadores** (CTAs direcionam para o contato comercial / mídia kit).
+> Foco de conversão: **venda de ingressos** (individual e lote corporativo).
 
-1. Hero — proposta de valor, data/horário/local, métricas e CTA "Quero ser patrocinador"
+1. Hero — proposta de valor, data/horário/local, métricas e CTA "Comprar ingressos"
 2. A Dor & a Oportunidade — pilares do evento
 3. Tudo o que está por vir — consolidação do SFS (2ª edição)
 4. Trilhas de conteúdo — 4 trilhas temáticas (accordion)
 5. Keynote Speakers — grid com "ver todos"
 6. Condução — host do evento
-7. Público qualificado — quem a marca do patrocinador alcança
-8. Por que apoiar o SFS 2026 — motivos para patrocinar
+7. Para quem é — personas-alvo
+8. Ingressos — área crítica de conversão (individual + lote corporativo)
 9. Apoio Institucional — esteira de logos
-10. Patrocínio — área crítica de conversão (cotas + contato comercial)
-11. FAQ de patrocínio (accordion) + Rodapé (LGPD)
+10. Por que participar do SFS 2026 — motivos para ir
+11. FAQ de ingressos (accordion) + Rodapé (LGPD)
 
 ## Desenvolvimento
 

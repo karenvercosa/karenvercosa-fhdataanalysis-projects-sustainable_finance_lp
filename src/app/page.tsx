@@ -6,7 +6,7 @@ import { Programacao } from "@/components/Programacao";
 import { Speakers } from "@/components/Speakers";
 import { Host } from "@/components/Host";
 import { Audience } from "@/components/Audience";
-import { Patrocinio } from "@/components/Patrocinio";
+import { Ingressos } from "@/components/Ingressos";
 import { Sponsors } from "@/components/Sponsors";
 import { Support } from "@/components/Support";
 import { Faq } from "@/components/Faq";
@@ -32,9 +32,9 @@ export default function Page() {
         <Speakers />
         <Host />
         <Audience />
-        <Support />
+        <Ingressos />
         <Sponsors />
-        <Patrocinio />
+        <Support />
         <Faq />
       </main>
       <Footer />
