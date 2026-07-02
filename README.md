@@ -12,14 +12,19 @@ Landing page institucional e de alta conversão do evento **Sustainable Finance 
 
 ## Seções
 
-1. Hero — proposta de valor, data/horário/local, métricas e CTAs
+> Foco de conversão: **captação de patrocinadores** (CTAs direcionam para o contato comercial / mídia kit).
+
+1. Hero — proposta de valor, data/horário/local, métricas e CTA "Quero ser patrocinador"
 2. A Dor & a Oportunidade — pilares do evento
-3. Programação — Tabs por turno (Manhã/Tarde/Noite)
-4. Palestrantes — grid com "ver todos"
-5. Para quem é — personas-alvo
-6. Inscrição & Hub Digital — área crítica de conversão (escassez + reciprocidade)
-7. Apoio Institucional — esteira de logos
-8. FAQ (accordion) + Rodapé (LGPD)
+3. Tudo o que está por vir — consolidação do SFS (2ª edição)
+4. Trilhas de conteúdo — 4 trilhas temáticas (accordion)
+5. Keynote Speakers — grid com "ver todos"
+6. Condução — host do evento
+7. Público qualificado — quem a marca do patrocinador alcança
+8. Por que apoiar o SFS 2026 — motivos para patrocinar
+9. Apoio Institucional — esteira de logos
+10. Patrocínio — área crítica de conversão (cotas + mídia kit + contato comercial)
+11. FAQ de patrocínio (accordion) + Rodapé (LGPD)
 
 ## Desenvolvimento
 

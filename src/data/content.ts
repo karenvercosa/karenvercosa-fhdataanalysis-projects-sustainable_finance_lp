@@ -6,8 +6,15 @@ export const EVENT = {
   time: "08h30 às 21h00",
   venue: "Centro Cultural Oscar Niemeyer",
   city: "Goiânia · GO · Brasil",
-  hubUrl: "#", // onboarding Fase 1 do Hub Digital
+  sponsorEmail: "comercial@sustainablefinance.com.br",
 };
+
+// Link padrão para conversão de patrocínio (mailto com assunto pré-preenchido)
+export const SPONSOR_MAILTO = `mailto:${EVENT.sponsorEmail}?subject=${encodeURIComponent(
+  "Quero ser patrocinador do SFS 2026"
+)}&body=${encodeURIComponent(
+  "Olá! Temos interesse em patrocinar o Sustainable Finance Summit 2026. Poderiam enviar o mídia kit com as cotas e formatos de ativação?"
+)}`;
 
 export const METRICS = [
   { value: "+30", label: "Palestrantes confirmados" },
@@ -138,9 +145,9 @@ export const SUPPORT: { icon: IconName; title: string; text: string }[] = [
 export const SPONSORS = ["VerdeCapital", "Banco Cerrado", "CarbonIQ", "AgroData", "Atlântica Asset", "EcoMercado"];
 
 export const FAQ: { q: string; a: string }[] = [
-  { q: "O evento emite certificado?", a: "Sim. Todos os participantes — presenciais e do Hub Digital — recebem certificado digital de participação, disponível na plataforma após o encerramento, com a carga horária das trilhas acompanhadas." },
-  { q: "Haverá gravação dos painéis?", a: "Sim. Os painéis são transmitidos ao vivo e ficam gravados no Hub Digital. Quem criar a conta gratuita tem acesso on-demand às trilhas de conhecimento para assistir quando quiser." },
-  { q: "Como funcionam os reembolsos?", a: "A inscrição inicial no Hub Digital é gratuita, portanto não há cobrança a reembolsar. Para credenciais físicas liberadas via voucher corporativo de parceiro, o cancelamento segue a política do contrato firmado com a empresa parceira." },
-  { q: "Empresas têm desconto para grupos?", a: "Sim. Empresas parceiras recebem vouchers corporativos para distribuir entre seus times, validados diretamente no login. Para condições de grupo, fale com a nossa equipe pelo botão “Seja um patrocinador”." },
-  { q: "Preciso pagar para assistir online?", a: "Não. A transmissão ao vivo e as trilhas no Hub Digital são gratuitas — basta criar a conta. O acesso presencial é que é limitado pela capacidade do Centro Cultural Oscar Niemeyer." },
+  { q: "Quais são as cotas de patrocínio disponíveis?", a: "Trabalhamos com cotas em diferentes níveis de investimento e visibilidade — de apoio a master — com formatos de ativação sob medida para os objetivos da sua marca. Solicite o mídia kit para ver valores e contrapartidas de cada cota." },
+  { q: "O que está incluído em uma cota de patrocínio?", a: "Conforme o nível da cota: presença da marca nos materiais e no palco, espaço para estande ou ativação, ingressos de cortesia para o seu time, participação em painéis e exposição nos canais dos parceiros de mídia do evento." },
+  { q: "Que público a minha marca vai alcançar?", a: "Executivos e tomadores de decisão (C-level), investidores e fundos de Venture Capital, produtores rurais, startups, governo e terceiro setor — além de alcance nacional por meio dos parceiros de mídia que dão dimensão ao evento." },
+  { q: "O patrocínio dá direito a palestra ou painel?", a: "Sim, dependendo da cota. As cotas superiores incluem espaço de conteúdo (keynote, painel ou masterclass) alinhado à curadoria das trilhas temáticas do evento." },
+  { q: "Como recebo o mídia kit e fecho o patrocínio?", a: "Clique em “Quero ser patrocinador” ou fale com o time comercial. Enviamos o mídia kit completo, apresentamos as cotas e conduzimos a proposta de acordo com os objetivos e o orçamento da sua marca." },
 ];
