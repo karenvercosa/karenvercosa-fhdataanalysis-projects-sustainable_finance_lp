@@ -34,21 +34,21 @@ export function Hero() {
 
           {/* Data / Horário / Local */}
           <div className="mt-8 grid gap-4 rounded-lg border border-brand-500/40 bg-brand-700/60 p-4 backdrop-blur-sm sm:grid-cols-3 sm:divide-x sm:divide-white/15">
-            <div className="flex items-center gap-3 sm:pr-4">
+            <div className="flex items-start gap-3 sm:pr-4">
               <CalendarDays className="size-6 shrink-0 text-brand-subtle" strokeWidth={1.8} />
               <div>
                 <p className="text-xs text-ink-200">Data</p>
                 <p className="font-heading font-bold text-white">{EVENT.date}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 sm:px-4">
+            <div className="flex items-start gap-3 sm:px-4">
               <Clock className="size-6 shrink-0 text-brand-subtle" strokeWidth={1.8} />
               <div>
                 <p className="text-xs text-ink-200">Horário</p>
                 <p className="font-heading font-bold text-white">{EVENT.time}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 sm:pl-4">
+            <div className="flex items-start gap-3 sm:pl-4">
               <MapPin className="size-6 shrink-0 text-brand-subtle" strokeWidth={1.8} />
               <div>
                 <p className="text-xs text-ink-200">Local</p>
