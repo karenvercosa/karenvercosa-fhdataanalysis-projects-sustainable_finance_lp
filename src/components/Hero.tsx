@@ -13,7 +13,7 @@ export function Hero() {
         <div className="hero-grid absolute inset-0" />
       </div>
 
-      <div className="mx-auto grid max-w-content items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-28">
+      <div className="mx-auto grid max-w-content items-center gap-12 px-4 pb-16 pt-6 sm:px-6 sm:pb-24 sm:pt-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:px-8 lg:pb-28 lg:pt-10">
         {/* Coluna de texto */}
         <div>
           {/* Chapéu */}
