@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { BuyButton } from "@/components/TicketPurchase";
 
 const LINKS = [
   { href: "#sobre-evento", label: "Sobre" },
@@ -49,10 +48,13 @@ export function Header() {
 
           {/* Ações */}
           <div className="flex items-center gap-3">
-            <BuyButton className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-brand-subtle px-3 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-colors hover:bg-white sm:px-4">
+            <a
+              href="#ingressos"
+              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-brand-subtle px-3 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-colors hover:bg-white sm:px-4"
+            >
               <span className="sm:hidden">Ingressos</span>
               <span className="hidden sm:inline">Comprar ingressos</span>
-            </BuyButton>
+            </a>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -79,12 +81,13 @@ export function Header() {
                   {l.label}
                 </a>
               ))}
-              <BuyButton
+              <a
+                href="#ingressos"
                 onClick={() => setOpen(false)}
                 className="mt-2 rounded-sm bg-brand-subtle px-3 py-3 text-center font-semibold text-brand-900"
               >
                 Comprar ingressos
-              </BuyButton>
+              </a>
             </div>
           </div>
         )}

@@ -1,5 +1,4 @@
 import { EVENT } from "@/data/content";
-import { BuyButton } from "@/components/TicketPurchase";
 
 export function Footer() {
   return (
@@ -27,7 +26,7 @@ export function Footer() {
           <nav className="text-sm">
             <h3 className="font-heading text-white">Institucional</h3>
             <ul className="mt-4 space-y-3">
-              <li><BuyButton className="text-left transition-colors hover:text-brand-subtle">Comprar ingressos</BuyButton></li>
+              <li><a href="#ingressos" className="transition-colors hover:text-brand-subtle">Comprar ingressos</a></li>
               <li><a href="#faq" className="transition-colors hover:text-brand-subtle">Perguntas frequentes</a></li>
               <li><a href="#" className="transition-colors hover:text-brand-subtle">Política de Privacidade</a></li>
               <li><a href="#" className="transition-colors hover:text-brand-subtle">Conformidade LGPD</a></li>

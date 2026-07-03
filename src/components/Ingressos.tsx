@@ -37,6 +37,7 @@ export function Ingressos() {
               transmissão dos painéis. Ideal para participação individual.
             </p>
             <BuyButton
+              mode="individual"
               qty={1}
               className="mt-6 inline-flex items-center justify-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
             >
@@ -56,6 +57,7 @@ export function Ingressos() {
               grupos, com um único voucher para distribuir.
             </p>
             <BuyButton
+              mode="lote"
               qty={10}
               className="mt-6 inline-flex items-center justify-center gap-2 rounded-sm border border-brand-subtle px-8 py-4 text-base font-semibold text-brand-subtle transition-colors hover:bg-brand-subtle/10"
             >

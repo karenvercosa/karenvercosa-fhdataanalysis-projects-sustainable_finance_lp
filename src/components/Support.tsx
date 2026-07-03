@@ -1,6 +1,5 @@
 import { Icon } from "@/components/Icon";
 import { SUPPORT } from "@/data/content";
-import { BuyButton } from "@/components/TicketPurchase";
 
 export function Support() {
   return (
@@ -31,9 +30,12 @@ export function Support() {
         </div>
 
         <div className="reveal mt-12">
-          <BuyButton className="inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white">
+          <a
+            href="#ingressos"
+            className="inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
+          >
             Comprar ingressos
-          </BuyButton>
+          </a>
         </div>
       </div>
     </section>
