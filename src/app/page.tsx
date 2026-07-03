@@ -12,6 +12,7 @@ import { Support } from "@/components/Support";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { TicketModalProvider } from "@/components/TicketPurchase";
 
 export default function Page() {
   return (
@@ -23,21 +24,23 @@ export default function Page() {
         Pular para a programação
       </a>
 
-      <Header />
-      <main>
-        <Hero />
-        <Opportunity />
-        <Consolidation />
-        <Programacao />
-        <Speakers />
-        <Host />
-        <Audience />
-        <Ingressos />
-        <Sponsors />
-        <Support />
-        <Faq />
-      </main>
-      <Footer />
+      <TicketModalProvider>
+        <Header />
+        <main>
+          <Hero />
+          <Opportunity />
+          <Consolidation />
+          <Programacao />
+          <Speakers />
+          <Host />
+          <Audience />
+          <Ingressos />
+          <Sponsors />
+          <Support />
+          <Faq />
+        </main>
+        <Footer />
+      </TicketModalProvider>
       <ScrollReveal />
     </>
   );

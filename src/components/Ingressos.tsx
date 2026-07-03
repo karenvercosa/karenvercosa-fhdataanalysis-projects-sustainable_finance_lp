@@ -1,5 +1,5 @@
 import { ArrowRight, AlertTriangle, Ticket, Users } from "lucide-react";
-import { EVENT, LOTE_MAILTO } from "@/data/content";
+import { BuyButton } from "@/components/TicketPurchase";
 
 export function Ingressos() {
   return (
@@ -36,13 +36,13 @@ export function Ingressos() {
               Acesso presencial ao evento, às <strong className="text-white">trilhas de conteúdo</strong> e à
               transmissão dos painéis. Ideal para participação individual.
             </p>
-            <a
-              href={EVENT.ticketsUrl}
+            <BuyButton
+              qty={1}
               className="mt-6 inline-flex items-center justify-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
             >
               Comprar ingresso
               <ArrowRight className="size-5" strokeWidth={2.2} />
-            </a>
+            </BuyButton>
           </div>
 
           {/* Lote corporativo */}
@@ -50,18 +50,18 @@ export function Ingressos() {
             <span className="grid size-12 place-items-center rounded-md bg-brand-subtle text-brand-900">
               <Users className="size-6" strokeWidth={2} />
             </span>
-            <h3 className="mt-6 font-heading text-xl text-white">Lote de ingressos (empresas)</h3>
+            <h3 className="mt-6 font-heading text-xl text-white">Lote de ingressos</h3>
             <p className="mt-3 flex-1 leading-relaxed text-ink-200">
               Leve o seu time. <strong className="text-white">Condições especiais por volume</strong> para empresas e
-              grupos, com faturamento facilitado.
+              grupos, com um único voucher para distribuir.
             </p>
-            <a
-              href={LOTE_MAILTO}
+            <BuyButton
+              qty={10}
               className="mt-6 inline-flex items-center justify-center gap-2 rounded-sm border border-brand-subtle px-8 py-4 text-base font-semibold text-brand-subtle transition-colors hover:bg-brand-subtle/10"
             >
               Comprar lote
               <ArrowRight className="size-5" strokeWidth={2.2} />
-            </a>
+            </BuyButton>
           </div>
         </div>
 

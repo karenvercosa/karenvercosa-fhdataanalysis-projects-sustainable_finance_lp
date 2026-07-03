@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { FAQ } from "@/data/content";
+import { BuyButton } from "@/components/TicketPurchase";
 
 export function Faq() {
   // Accordion exclusivo (prevenção de sobrecarga cognitiva)
@@ -50,12 +51,9 @@ export function Faq() {
         {/* Reforço de CTA pós-FAQ */}
         <div className="reveal mt-12 rounded-lg bg-brand-900 p-8 text-center">
           <p className="font-heading text-xl text-white">Garanta seu ingresso para o SFS 2026.</p>
-          <a
-            href="#ingressos"
-            className="mt-4 inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 font-semibold text-brand-900 transition-colors hover:bg-white"
-          >
+          <BuyButton className="mt-4 inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 font-semibold text-brand-900 transition-colors hover:bg-white">
             Comprar ingressos
-          </a>
+          </BuyButton>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
 import { EVENT, METRICS } from "@/data/content";
+import { BuyButton } from "@/components/TicketPurchase";
 
 export function Hero() {
   return (
@@ -63,12 +64,9 @@ export function Hero() {
 
           {/* CTAs */}
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <a
-              href="#ingressos"
-              className="inline-flex items-center justify-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
-            >
+            <BuyButton className="inline-flex items-center justify-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white">
               Comprar ingressos <ArrowRight className="size-5" strokeWidth={2.2} />
-            </a>
+            </BuyButton>
             <a
               href="#programacao"
               className="inline-flex items-center justify-center gap-2 rounded-sm border border-brand-subtle px-8 py-4 text-base font-semibold text-brand-subtle transition-colors hover:bg-brand-subtle/10"

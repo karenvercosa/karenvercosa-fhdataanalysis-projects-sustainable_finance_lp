@@ -6,16 +6,17 @@ export const EVENT = {
   time: "08h30 às 21h00",
   venue: "Centro Cultural Oscar Niemeyer",
   city: "Goiânia · GO · Brasil",
-  ticketsUrl: "#", // TODO: link do checkout de ingressos (ex.: Sympla/Eventbrite)
-  salesEmail: "comercial@sustainablefinance.com.br", // lotes corporativos
+  ticketsUrl: "#", // TODO: link do checkout de pagamento (ex.: Asaas)
+  salesEmail: "comercial@sustainablefinance.com.br",
 };
 
-// Contato comercial para compra de lote de ingressos (mailto pré-preenchido)
-export const LOTE_MAILTO = `mailto:${EVENT.salesEmail}?subject=${encodeURIComponent(
-  "Compra de lote de ingressos — SFS 2026"
-)}&body=${encodeURIComponent(
-  "Olá! Temos interesse em adquirir um lote de ingressos para o Sustainable Finance Summit 2026. Poderiam enviar as condições para grupos/empresas?"
-)}`;
+// Configuração da compra de convites (modal "Adquirir ingressos")
+export const TICKET = {
+  pricePerUnit: 250, // R$ por convite
+  quickQuantities: [5, 10, 25, 50],
+  defaultQuantity: 10,
+  paymentProvider: "Asaas", // Cartão ou Pix
+};
 
 export const METRICS = [
   { value: "+30", label: "Palestrantes confirmados" },
