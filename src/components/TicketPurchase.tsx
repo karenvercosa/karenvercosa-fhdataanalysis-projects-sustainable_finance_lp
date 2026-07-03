@@ -19,6 +19,22 @@ export function useTicketModal() {
 const brl = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const clampQty = (n: number) => Math.max(1, Math.min(9999, Math.floor(Number.isFinite(n) ? n : 1)));
 
+// Formata CPF (000.000.000-00) ou CNPJ (00.000.000/0000-00) conforme a quantidade de dígitos
+const maskDoc = (value: string) => {
+  const d = value.replace(/\D/g, "").slice(0, 14);
+  if (d.length <= 11) {
+    return d
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  }
+  return d
+    .replace(/(\d{2})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1/$2")
+    .replace(/(\d{4})(\d{1,2})$/, "$1-$2");
+};
+
 // ---------------------------------------------------------------------------
 // Botão de compra — abre o modal (usado em toda a landing page)
 // ---------------------------------------------------------------------------
@@ -55,6 +71,7 @@ export function TicketModalProvider({ children }: { children: React.ReactNode })
   const [isOpen, setIsOpen] = useState(false);
   const [qty, setQty] = useState(TICKET.defaultQuantity);
   const [voucher, setVoucher] = useState("");
+  const [doc, setDoc] = useState("");
 
   const open = useCallback((initialQty?: number) => {
     if (initialQty && initialQty > 0) setQty(clampQty(initialQty));
@@ -85,13 +102,16 @@ export function TicketModalProvider({ children }: { children: React.ReactNode })
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-[60] flex items-end justify-center overflow-y-auto bg-black/60 backdrop-blur-sm sm:items-center sm:p-4"
+          className="fixed inset-0 z-[60] overflow-y-auto bg-black/60 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-labelledby="ticket-modal-title"
-          onMouseDown={(e) => e.target === e.currentTarget && close()}
         >
-          <div className="relative w-full max-w-lg rounded-t-lg bg-ink-50 shadow-card sm:rounded-lg">
+          <div
+            className="flex min-h-full items-end justify-center sm:items-center sm:p-4"
+            onMouseDown={(e) => e.target === e.currentTarget && close()}
+          >
+            <div className="relative w-full max-w-lg rounded-t-lg bg-ink-50 shadow-card sm:my-8 sm:rounded-lg">
             {/* Cabeçalho */}
             <div className="flex items-start gap-4 rounded-t-lg border-b border-ink-100 bg-ink-0 p-6">
               <span className="grid size-11 shrink-0 place-items-center rounded-md bg-brand-subtle/25 text-brand-600">
@@ -115,18 +135,35 @@ export function TicketModalProvider({ children }: { children: React.ReactNode })
 
             {/* Corpo */}
             <div className="space-y-4 p-6">
+              {/* Comprador */}
+              <div className="rounded-lg border border-ink-100 bg-ink-0 p-4">
+                <h3 className="font-heading text-base text-brand-900">Dados do comprador</h3>
+                <p className="mt-1 text-sm text-ink-600">Informe o documento para emissão da nota e dos ingressos.</p>
+                <label className="mt-4 block">
+                  <span className="text-sm font-semibold text-brand-900">CPF ou CNPJ</span>
+                  <input
+                    value={doc}
+                    onChange={(e) => setDoc(maskDoc(e.target.value))}
+                    inputMode="numeric"
+                    autoComplete="off"
+                    placeholder="000.000.000-00 ou 00.000.000/0000-00"
+                    className="mt-2 w-full rounded-md border border-ink-200 bg-ink-0 px-4 py-3 text-brand-900 placeholder:text-ink-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-subtle/40"
+                  />
+                </label>
+              </div>
+
               {/* Voucher */}
               <div className="rounded-lg border border-ink-100 bg-ink-0 p-4">
                 <h3 className="font-heading text-base text-brand-900">Voucher</h3>
                 <p className="mt-1 text-sm text-ink-600">
-                  Escolha um voucher já utilizado ou escreva um novo nome. Reutilizar um código soma os convites a ele.
+                  Dê um nome ao seu voucher — ele agrupa os convites desta compra para você distribuir.
                 </p>
                 <label className="mt-4 block">
                   <span className="text-sm font-semibold text-brand-900">Nome do voucher</span>
                   <input
                     value={voucher}
                     onChange={(e) => setVoucher(e.target.value)}
-                    placeholder="Ex.: VERDE2026 — ou escolha um existente"
+                    placeholder="Ex.: VERDE2026"
                     className="mt-2 w-full rounded-md border border-ink-200 bg-ink-0 px-4 py-3 text-brand-900 placeholder:text-ink-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-subtle/40"
                   />
                 </label>
@@ -214,6 +251,7 @@ export function TicketModalProvider({ children }: { children: React.ReactNode })
               >
                 Comprar {qty} convite{plural} · {brl(total)}
               </a>
+            </div>
             </div>
           </div>
         </div>
