@@ -138,7 +138,7 @@ export function TicketModalProvider({ children }: { children: React.ReactNode })
                   </h2>
                   <p className="mt-1 text-sm text-ink-600">
                     {isIndividual
-                      ? "Preencha seus dados e finalize a compra do seu ingresso."
+                      ? "Ingresso da modalidade online — preencha seus dados e finalize a compra."
                       : "Compre convites em lote e distribua via voucher."}
                   </p>
                 </div>
@@ -294,7 +294,7 @@ export function TicketModalProvider({ children }: { children: React.ReactNode })
                     <p>
                       Pagamento via <strong className="text-brand-900">{TICKET.paymentProvider}</strong> (Cartão ou Pix).{" "}
                       {isIndividual
-                        ? `Ao concluir, você recebe ${qty} ingresso${plural} por e-mail.`
+                        ? `Ao concluir, você recebe ${qty} ingresso${plural} online por e-mail, com o acesso à transmissão ao vivo.`
                         : `Ao concluir, você recebe 1 voucher com ${qty} convite${plural} para distribuir.`}
                     </p>
                   </div>

@@ -31,10 +31,15 @@ export function Ingressos() {
             <span className="grid size-12 place-items-center rounded-md bg-brand-subtle text-brand-900">
               <Ticket className="size-6" strokeWidth={2} />
             </span>
-            <h3 className="mt-6 font-heading text-xl text-white">Ingresso individual</h3>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <h3 className="font-heading text-xl text-white">Ingresso individual</h3>
+              <span className="rounded-full bg-brand-subtle/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-subtle">
+                Online
+              </span>
+            </div>
             <p className="mt-3 flex-1 leading-relaxed text-ink-200">
-              Acesso presencial ao evento, às <strong className="text-white">trilhas de conteúdo</strong> e à
-              transmissão dos painéis. Ideal para participação individual.
+              Acesso <strong className="text-white">100% online</strong> ao evento: transmissão ao vivo dos painéis e
+              trilhas de conteúdo, de onde você estiver.
             </p>
             <BuyButton
               mode="individual"
