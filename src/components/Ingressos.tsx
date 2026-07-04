@@ -56,10 +56,15 @@ export function Ingressos() {
             <span className="grid size-12 place-items-center rounded-md bg-brand-subtle text-brand-900">
               <Users className="size-6" strokeWidth={2} />
             </span>
-            <h3 className="mt-6 font-heading text-xl text-white">Lote de ingressos</h3>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <h3 className="font-heading text-xl text-white">Lote de ingressos</h3>
+              <span className="rounded-full bg-brand-subtle/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-subtle">
+                Presencial
+              </span>
+            </div>
             <p className="mt-3 flex-1 leading-relaxed text-ink-200">
-              Leve o seu time. <strong className="text-white">Condições especiais por volume</strong> para empresas e
-              grupos, com um único voucher para distribuir.
+              Leve o seu time ao evento <strong className="text-white">presencial</strong>, em Goiânia. Condições
+              especiais por volume para empresas e grupos, com um único voucher para distribuir.
             </p>
             <BuyButton
               mode="lote"
