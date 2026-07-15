@@ -34,7 +34,7 @@ export function Support() {
             href="#caminhos"
             className="inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
           >
-            Torne-se membro
+            Cadastre-se
           </a>
         </div>
       </div>

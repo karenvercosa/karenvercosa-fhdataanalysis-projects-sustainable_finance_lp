@@ -168,32 +168,29 @@ export const PATHS: Path[] = [
   {
     key: "membro",
     icon: "users",
-    name: "Membro Participante",
+    name: "Plano Gratuito",
     price: "Acesso gratuito",
     badge: "Comece por aqui",
-    description:
-      "Cadastro imediato na plataforma. Dá acesso às transmissões ao vivo (streaming) no dia do evento e à visualização de conteúdos públicos.",
-    note: "Já tem um voucher corporativo de um parceiro? Você o valida dentro da plataforma para se tornar Participante Geral.",
-    features: [
-      "Transmissões ao vivo no dia do evento",
-      "Conteúdos públicos do hub",
-      "Validação de voucher corporativo",
-    ],
+    description: "Cadastro imediato na plataforma. Dá acesso às transmissões ao vivo (streaming) no dia do evento.",
+    note: "Já tem um voucher corporativo de um parceiro? Você o valida dentro da plataforma para ter acesso ilimitado à plataforma e acesso presencial ao evento.",
+    features: ["Transmissões ao vivo no dia do evento", "Validação de voucher corporativo"],
     cta: "Cadastre-se Gratuitamente",
     status: "soon",
   },
   {
     key: "assinatura",
     icon: "layers",
-    name: "Assinatura da Plataforma",
+    name: "Participante Premium",
     price: "Acesso ao Conhecimento",
     highlighted: true,
     description:
       "Liberação completa do Hub de Conhecimento, com permissão para baixar relatórios exclusivos, estudos de caso e materiais de mercado.",
     features: [
+      "Transmissões ao vivo no dia do evento",
       "Hub de Conhecimento completo",
       "Downloads de relatórios e estudos de caso",
-      "Resumos estruturados e PDFs de apresentações",
+      "Participação em webinars",
+      "PDFs e materiais das palestras",
     ],
     cta: "Assinar Plataforma",
     status: "soon",
@@ -216,9 +213,9 @@ export const PATHS: Path[] = [
 ];
 
 export const FAQ: { q: string; a: string }[] = [
-  { q: "O acesso online é gratuito?", a: "Sim. Ao se cadastrar como Membro Participante, você entra gratuitamente na plataforma e tem acesso às transmissões ao vivo no dia do evento e aos conteúdos públicos. A plataforma está em construção — o cadastro será liberado em breve." },
+  { q: "O acesso online é gratuito?", a: "Sim. Com o Plano Gratuito, você entra gratuitamente na plataforma e tem acesso às transmissões ao vivo no dia do evento. A plataforma está em construção — o cadastro será liberado em breve." },
   { q: "Como uso o meu voucher corporativo após me cadastrar?", a: "Se você recebeu um voucher de um parceiro, basta fazer o cadastro gratuito e validar o código dentro da plataforma. Ele libera automaticamente o seu acesso como Participante Geral, sem custo." },
-  { q: "Como funciona a assinatura de relatórios?", a: "A Assinatura da Plataforma libera o Hub de Conhecimento completo: downloads de relatórios exclusivos, estudos de caso, resumos estruturados e PDFs de apresentações de mercado. A contratação será habilitada assim que a plataforma entrar no ar." },
+  { q: "Como funciona a assinatura de relatórios?", a: "O Participante Premium (assinatura da plataforma) libera o Hub de Conhecimento completo: downloads de relatórios exclusivos, estudos de caso, participação em webinars e PDFs e materiais das palestras. A contratação será habilitada assim que a plataforma entrar no ar." },
   { q: "Quero patrocinar ou ser curador. Como faço?", a: "Cotas comerciais, patrocínio e vouchers corporativos são tratados fora da plataforma, diretamente com o nosso time. Clique em “Quero ser Curador / Patrocinador” para falar com o comercial e receber as condições." },
   { q: "O evento é online ou presencial?", a: "Os dois. O evento acontece presencialmente no Centro Cultural Oscar Niemeyer, em Goiânia (04/09/2026), e é transmitido ao vivo para os membros da plataforma." },
 ];

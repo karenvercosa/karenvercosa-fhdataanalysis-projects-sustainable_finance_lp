@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Opportunity } from "@/components/Opportunity";
 import { Programacao } from "@/components/Programacao";
 import { Audience } from "@/components/Audience";
+import { Host } from "@/components/Host";
 import { Matriz } from "@/components/Matriz";
 import { Sponsors } from "@/components/Sponsors";
 import { Faq } from "@/components/Faq";
@@ -12,7 +13,6 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 // Seções mantidas no código para possível reativação (fora do escopo atual):
 // import { Consolidation } from "@/components/Consolidation";
 // import { Speakers } from "@/components/Speakers";
-// import { Host } from "@/components/Host";
 // import { Support } from "@/components/Support";
 
 export default function Page() {
@@ -37,6 +37,8 @@ export default function Page() {
         <Speakers /> */}
         {/* 5 · Para quem é o ecossistema */}
         <Audience />
+        {/* Condução — quem media o evento */}
+        <Host />
         {/* 6 · Matriz de 3 Caminhos (conversão para o ecossistema) */}
         <Matriz />
         {/* 7 · Apoio Institucional */}

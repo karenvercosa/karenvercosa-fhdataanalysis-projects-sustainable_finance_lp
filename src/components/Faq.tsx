@@ -54,7 +54,7 @@ export function Faq() {
             href="#caminhos"
             className="mt-4 inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 font-semibold text-brand-900 transition-colors hover:bg-white"
           >
-            Torne-se membro
+            Cadastre-se
           </a>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
-import { EVENT, METRICS, CONSULTOR_MAILTO } from "@/data/content";
+import { EVENT, METRICS, CURADOR_MAILTO } from "@/data/content";
 
 export function Hero() {
   return (
@@ -23,14 +23,13 @@ export function Hero() {
 
           {/* Headline */}
           <h1 className="mt-6 text-display text-white">
-            O ecossistema de <span className="text-brand-subtle">finanças sustentáveis</span> que conecta conhecimento e
-            negócios
+            O maior evento de <span className="text-brand-subtle">finanças sustentáveis</span> do Brasil
           </h1>
 
           {/* Subheadline */}
           <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-200 sm:text-lg">
-            Torne-se membro do hub que reúne capital, agronegócio e inovação: transmissões ao vivo do evento, relatórios
-            exclusivos e as conexões certas para a transição verde. O ponto de partida é entrar na plataforma.
+            Onde capital, agronegócio e inovação se encontram para construir a transição verde — com as ferramentas, os
+            dados e as conexões certas para transformar negócios.
           </p>
 
           {/* Data / Horário / Local */}
@@ -68,13 +67,13 @@ export function Hero() {
               href="#caminhos"
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
             >
-              Torne-se membro <ArrowRight className="size-5" strokeWidth={2.2} />
+              Cadastre-se <ArrowRight className="size-5" strokeWidth={2.2} />
             </a>
             <a
-              href={CONSULTOR_MAILTO}
+              href={CURADOR_MAILTO}
               className="inline-flex items-center justify-center gap-2 rounded-sm border border-brand-subtle px-8 py-4 text-base font-semibold text-brand-subtle transition-colors hover:bg-brand-subtle/10"
             >
-              Falar com Consultor (B2B)
+              Seja um patrocinador/curador
             </a>
           </div>
         </div>

@@ -7,6 +7,7 @@ const LINKS = [
   { href: "#oportunidade", label: "Sobre" },
   { href: "#programacao", label: "Conteúdo" },
   { href: "#publico", label: "Para quem é" },
+  { href: "#conducao", label: "Condução" },
   { href: "#caminhos", label: "Como participar" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -51,8 +52,7 @@ export function Header() {
               href="#caminhos"
               className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-brand-subtle px-3 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-colors hover:bg-white sm:px-4"
             >
-              <span className="sm:hidden">Participar</span>
-              <span className="hidden sm:inline">Torne-se membro</span>
+              Cadastre-se
             </a>
             <button
               type="button"
@@ -85,7 +85,7 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 className="mt-2 rounded-sm bg-brand-subtle px-3 py-3 text-center font-semibold text-brand-900"
               >
-                Torne-se membro
+                Cadastre-se
               </a>
             </div>
           </div>
