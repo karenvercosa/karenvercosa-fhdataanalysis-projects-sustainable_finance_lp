@@ -12,19 +12,20 @@ Landing page institucional e de alta conversão do evento **Sustainable Finance 
 
 ## Seções
 
-> Foco de conversão: **venda de ingressos** (individual e lote corporativo).
+> Foco de conversão: **entrada no ecossistema da plataforma** (sem venda direta de ingressos por cotas).
 
-1. Hero — proposta de valor, data/horário/local, métricas e CTA "Comprar ingressos"
-2. A Dor & a Oportunidade — pilares do evento
-3. Tudo o que está por vir — consolidação do SFS (2ª edição)
-4. Trilhas de conteúdo — 4 trilhas temáticas (accordion)
-5. Keynote Speakers — grid com "ver todos"
-6. Condução — host do evento
-7. Para quem é — personas-alvo
-8. Ingressos — área crítica de conversão (individual + lote corporativo)
-9. Apoio Institucional — esteira de logos
-10. Por que participar do SFS 2026 — motivos para ir
-11. FAQ de ingressos (accordion) + Rodapé (LGPD)
+1. Hero — foco em ecossistema/hub; CTAs "Torne-se membro" e "Falar com Consultor (B2B)"
+2. A Dor & a Oportunidade — pilares de valor
+3. Trilhas de conteúdo — 4 trilhas temáticas (accordion)
+4. Para quem é — personas-alvo
+5. Matriz de 3 Caminhos — Membro (grátis), Assinatura, Curador/Patrocinador
+6. Apoio Institucional — esteira de logos
+7. FAQ (accordion) + Rodapé (LGPD)
+
+### Seções mantidas no código, fora do escopo atual (reativáveis)
+
+Não renderizadas em `page.tsx`, mas preservadas para religar sem reconstruir:
+`Speakers` (Palestrantes), `Consolidation` ("Tudo o que está por vir"), `Host` (Condução), `Support` ("Por que participar").
 
 ## Desenvolvimento
 

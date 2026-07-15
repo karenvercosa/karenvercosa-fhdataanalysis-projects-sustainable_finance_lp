@@ -18,7 +18,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               <li><a href="#oportunidade" className="transition-colors hover:text-brand-subtle">Sobre</a></li>
               <li><a href="#programacao" className="transition-colors hover:text-brand-subtle">Programação</a></li>
-              <li><a href="#palestrantes" className="transition-colors hover:text-brand-subtle">Palestrantes</a></li>
+              <li><a href="#caminhos" className="transition-colors hover:text-brand-subtle">Como participar</a></li>
               <li><a href="#publico" className="transition-colors hover:text-brand-subtle">Para quem é</a></li>
             </ul>
           </nav>
@@ -26,7 +26,7 @@ export function Footer() {
           <nav className="text-sm">
             <h3 className="font-heading text-white">Institucional</h3>
             <ul className="mt-4 space-y-3">
-              <li><a href="#ingressos" className="transition-colors hover:text-brand-subtle">Comprar ingressos</a></li>
+              <li><a href="#caminhos" className="transition-colors hover:text-brand-subtle">Torne-se membro</a></li>
               <li><a href="#faq" className="transition-colors hover:text-brand-subtle">Perguntas frequentes</a></li>
               <li><a href="#" className="transition-colors hover:text-brand-subtle">Política de Privacidade</a></li>
               <li><a href="#" className="transition-colors hover:text-brand-subtle">Conformidade LGPD</a></li>

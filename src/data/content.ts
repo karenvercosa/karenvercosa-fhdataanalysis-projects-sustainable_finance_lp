@@ -6,17 +6,19 @@ export const EVENT = {
   time: "08h30 às 21h00",
   venue: "Centro Cultural Oscar Niemeyer",
   city: "Goiânia · GO · Brasil",
-  ticketsUrl: "#", // TODO: link do checkout de pagamento (ex.: Asaas)
+  onboardingUrl: "#", // TODO: onboarding Fase 1 da plataforma (em construção)
+  platformReady: false, // enquanto false, cadastro/assinatura ficam "em breve"
   salesEmail: "comercial@sustainablefinance.com.br",
+  whatsapp: "https://wa.me/5562000000000", // TODO: WhatsApp comercial (B2B)
 };
 
-// Configuração da compra de convites (modal "Adquirir ingressos")
-export const TICKET = {
-  pricePerUnit: 250, // R$ por convite
-  quickQuantities: [5, 10, 25, 50],
-  defaultQuantity: 10,
-  paymentProvider: "Asaas", // Cartão ou Pix
-};
+// Contatos comerciais (fora da plataforma) — B2B / curadoria / patrocínio
+export const CONSULTOR_MAILTO = `mailto:${EVENT.salesEmail}?subject=${encodeURIComponent(
+  "Falar com consultor (B2B) — SFS 2026"
+)}`;
+export const CURADOR_MAILTO = `mailto:${EVENT.salesEmail}?subject=${encodeURIComponent(
+  "Quero ser Curador / Patrocinador — SFS 2026"
+)}`;
 
 export const METRICS = [
   { value: "+30", label: "Palestrantes confirmados" },
@@ -146,10 +148,77 @@ export const SUPPORT: { icon: IconName; title: string; text: string }[] = [
 
 export const SPONSORS = ["VerdeCapital", "Banco Cerrado", "CarbonIQ", "AgroData", "Atlântica Asset", "EcoMercado"];
 
+// Matriz de Escolha — 3 caminhos de engajamento no ecossistema da plataforma
+// status: "soon" = botão inativo (plataforma em construção) · "contact" = abre contato comercial
+export type Path = {
+  key: string;
+  icon: IconName;
+  name: string;
+  price: string;
+  badge?: string;
+  highlighted?: boolean;
+  description: string;
+  note?: string;
+  features: string[];
+  cta: string;
+  status: "soon" | "contact";
+};
+
+export const PATHS: Path[] = [
+  {
+    key: "membro",
+    icon: "users",
+    name: "Membro Participante",
+    price: "Acesso gratuito",
+    badge: "Comece por aqui",
+    description:
+      "Cadastro imediato na plataforma. Dá acesso às transmissões ao vivo (streaming) no dia do evento e à visualização de conteúdos públicos.",
+    note: "Já tem um voucher corporativo de um parceiro? Você o valida dentro da plataforma para se tornar Participante Geral.",
+    features: [
+      "Transmissões ao vivo no dia do evento",
+      "Conteúdos públicos do hub",
+      "Validação de voucher corporativo",
+    ],
+    cta: "Cadastre-se Gratuitamente",
+    status: "soon",
+  },
+  {
+    key: "assinatura",
+    icon: "layers",
+    name: "Assinatura da Plataforma",
+    price: "Acesso ao Conhecimento",
+    highlighted: true,
+    description:
+      "Liberação completa do Hub de Conhecimento, com permissão para baixar relatórios exclusivos, estudos de caso e materiais de mercado.",
+    features: [
+      "Hub de Conhecimento completo",
+      "Downloads de relatórios e estudos de caso",
+      "Resumos estruturados e PDFs de apresentações",
+    ],
+    cta: "Assinar Plataforma",
+    status: "soon",
+  },
+  {
+    key: "curador",
+    icon: "handshake",
+    name: "Patrocinadores e Curadores",
+    price: "Pessoa Física ou CNPJ",
+    description:
+      "Para marcas e players estratégicos que querem fechar negócios, posicionar a marca institucional em camadas ou liderar painéis. Cotas e vouchers corporativos são tratados fora da plataforma.",
+    features: [
+      "Posicionamento institucional em camadas",
+      "Curadoria e liderança de painéis",
+      "Negociação de cotas e vouchers corporativos",
+    ],
+    cta: "Quero ser Curador / Patrocinador",
+    status: "contact",
+  },
+];
+
 export const FAQ: { q: string; a: string }[] = [
-  { q: "Como compro meu ingresso?", a: "Clique em “Comprar ingressos”, escolha o tipo de ingresso e finalize o pagamento com segurança. Você recebe a confirmação e o ingresso por e-mail logo após a compra." },
-  { q: "Posso comprar um lote de ingressos para a minha empresa?", a: "Sim. Oferecemos lotes de ingressos para empresas e equipes, com condições especiais por volume. Fale com o time comercial pelo botão “Comprar lote” para receber uma proposta." },
-  { q: "O ingresso dá direito a quê?", a: "O ingresso garante o acesso presencial ao evento no Centro Cultural Oscar Niemeyer, às trilhas de conteúdo e à transmissão dos painéis. As condições completas são exibidas na hora da compra." },
-  { q: "O evento emite certificado?", a: "Sim. Todos os participantes recebem certificado digital de participação, disponibilizado após o encerramento, com a carga horária das trilhas acompanhadas." },
-  { q: "Como funcionam os reembolsos?", a: "O cancelamento e o reembolso seguem o Código de Defesa do Consumidor: solicitações feitas em até 7 dias após a compra são reembolsadas integralmente, respeitada a antecedência em relação à data do evento." },
+  { q: "O acesso online é gratuito?", a: "Sim. Ao se cadastrar como Membro Participante, você entra gratuitamente na plataforma e tem acesso às transmissões ao vivo no dia do evento e aos conteúdos públicos. A plataforma está em construção — o cadastro será liberado em breve." },
+  { q: "Como uso o meu voucher corporativo após me cadastrar?", a: "Se você recebeu um voucher de um parceiro, basta fazer o cadastro gratuito e validar o código dentro da plataforma. Ele libera automaticamente o seu acesso como Participante Geral, sem custo." },
+  { q: "Como funciona a assinatura de relatórios?", a: "A Assinatura da Plataforma libera o Hub de Conhecimento completo: downloads de relatórios exclusivos, estudos de caso, resumos estruturados e PDFs de apresentações de mercado. A contratação será habilitada assim que a plataforma entrar no ar." },
+  { q: "Quero patrocinar ou ser curador. Como faço?", a: "Cotas comerciais, patrocínio e vouchers corporativos são tratados fora da plataforma, diretamente com o nosso time. Clique em “Quero ser Curador / Patrocinador” para falar com o comercial e receber as condições." },
+  { q: "O evento é online ou presencial?", a: "Os dois. O evento acontece presencialmente no Centro Cultural Oscar Niemeyer, em Goiânia (04/09/2026), e é transmitido ao vivo para os membros da plataforma." },
 ];

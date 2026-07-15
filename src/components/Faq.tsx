@@ -14,7 +14,7 @@ export function Faq() {
         <div className="reveal text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">Dúvidas frequentes</p>
           <h2 className="mt-4 font-heading text-3xl text-brand-900 sm:text-4xl">
-            Tudo o que você precisa saber antes de comprar seu ingresso
+            Tudo o que você precisa saber para entrar no ecossistema
           </h2>
         </div>
 
@@ -49,12 +49,12 @@ export function Faq() {
 
         {/* Reforço de CTA pós-FAQ */}
         <div className="reveal mt-12 rounded-lg bg-brand-900 p-8 text-center">
-          <p className="font-heading text-xl text-white">Garanta seu ingresso para o SFS 2026.</p>
+          <p className="font-heading text-xl text-white">Entre no ecossistema do SFS 2026.</p>
           <a
-            href="#ingressos"
+            href="#caminhos"
             className="mt-4 inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 font-semibold text-brand-900 transition-colors hover:bg-white"
           >
-            Comprar ingressos
+            Torne-se membro
           </a>
         </div>
       </div>

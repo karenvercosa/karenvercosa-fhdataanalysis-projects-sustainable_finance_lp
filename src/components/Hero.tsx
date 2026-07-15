@@ -1,5 +1,5 @@
 import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
-import { EVENT, METRICS } from "@/data/content";
+import { EVENT, METRICS, CONSULTOR_MAILTO } from "@/data/content";
 
 export function Hero() {
   return (
@@ -23,13 +23,14 @@ export function Hero() {
 
           {/* Headline */}
           <h1 className="mt-6 text-display text-white">
-            O maior evento de <span className="text-brand-subtle">finanças sustentáveis</span> do Brasil
+            O ecossistema de <span className="text-brand-subtle">finanças sustentáveis</span> que conecta conhecimento e
+            negócios
           </h1>
 
           {/* Subheadline */}
           <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-200 sm:text-lg">
-            Onde capital, agronegócio e inovação se encontram para construir a transição verde — com as
-            ferramentas, os dados e as conexões certas para transformar negócios.
+            Torne-se membro do hub que reúne capital, agronegócio e inovação: transmissões ao vivo do evento, relatórios
+            exclusivos e as conexões certas para a transição verde. O ponto de partida é entrar na plataforma.
           </p>
 
           {/* Data / Horário / Local */}
@@ -64,16 +65,16 @@ export function Hero() {
           {/* CTAs */}
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
-              href="#ingressos"
+              href="#caminhos"
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
             >
-              Comprar ingressos <ArrowRight className="size-5" strokeWidth={2.2} />
+              Torne-se membro <ArrowRight className="size-5" strokeWidth={2.2} />
             </a>
             <a
-              href="#programacao"
+              href={CONSULTOR_MAILTO}
               className="inline-flex items-center justify-center gap-2 rounded-sm border border-brand-subtle px-8 py-4 text-base font-semibold text-brand-subtle transition-colors hover:bg-brand-subtle/10"
             >
-              Ver programação
+              Falar com Consultor (B2B)
             </a>
           </div>
         </div>

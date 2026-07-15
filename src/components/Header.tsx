@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const LINKS = [
-  { href: "#sobre-evento", label: "Sobre" },
+  { href: "#oportunidade", label: "Sobre" },
   { href: "#programacao", label: "Conteúdo" },
-  { href: "#palestrantes", label: "Palestrantes" },
-  { href: "#conducao", label: "Condução" },
   { href: "#publico", label: "Para quem é" },
+  { href: "#caminhos", label: "Como participar" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -49,11 +48,11 @@ export function Header() {
           {/* Ações */}
           <div className="flex items-center gap-3">
             <a
-              href="#ingressos"
+              href="#caminhos"
               className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-brand-subtle px-3 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-colors hover:bg-white sm:px-4"
             >
-              <span className="sm:hidden">Ingressos</span>
-              <span className="hidden sm:inline">Comprar ingressos</span>
+              <span className="sm:hidden">Participar</span>
+              <span className="hidden sm:inline">Torne-se membro</span>
             </a>
             <button
               type="button"
@@ -82,11 +81,11 @@ export function Header() {
                 </a>
               ))}
               <a
-                href="#ingressos"
+                href="#caminhos"
                 onClick={() => setOpen(false)}
                 className="mt-2 rounded-sm bg-brand-subtle px-3 py-3 text-center font-semibold text-brand-900"
               >
-                Comprar ingressos
+                Torne-se membro
               </a>
             </div>
           </div>
