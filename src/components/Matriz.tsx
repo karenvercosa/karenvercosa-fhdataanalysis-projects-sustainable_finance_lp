@@ -1,6 +1,7 @@
 import { Check, ArrowRight, Clock } from "lucide-react";
 import { Icon } from "@/components/Icon";
-import { PATHS, CURADOR_MAILTO } from "@/data/content";
+import { PATHS } from "@/data/content";
+import { SponsorButton } from "@/components/SponsorContact";
 
 export function Matriz() {
   return (
@@ -64,13 +65,10 @@ export function Matriz() {
                 {/* CTA */}
                 <div className="mt-8 pt-2">
                   {isContact ? (
-                    <a
-                      href={CURADOR_MAILTO}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
-                    >
+                    <SponsorButton className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white">
                       {path.cta}
                       <ArrowRight className="size-5" strokeWidth={2.2} />
-                    </a>
+                    </SponsorButton>
                   ) : (
                     <>
                       <button
