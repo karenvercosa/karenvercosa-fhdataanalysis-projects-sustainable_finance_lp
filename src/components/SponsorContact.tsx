@@ -127,7 +127,7 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                   id="sponsor-modal-title"
                   className="text-center font-heading text-2xl text-brand-900 sm:text-3xl"
                 >
-                  Seja um patrocinador
+                  Seja patrocinador ou curador
                 </h2>
 
                 {sent ? (
