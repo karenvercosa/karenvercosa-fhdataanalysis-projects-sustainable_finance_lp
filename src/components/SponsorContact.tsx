@@ -200,7 +200,7 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                       />
                     </label>
 
-                    <div className="pt-2">
+                    <div className="flex justify-end pt-2">
                       <button
                         type="submit"
                         className="rounded-md bg-brand-600 px-8 py-3 text-base font-semibold text-white shadow-cta transition-colors hover:bg-brand-700"
