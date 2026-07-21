@@ -2,7 +2,9 @@ import Redis from "ioredis";
 import { getContentFromDb } from "./content.service";
 
 // Inicia o client do Redis (usando a URL padrão local ou a definida nas variáveis de ambiente)
-const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379", {
+  password: process.env.REDIS_PASSWORD || undefined,
+});
 
 export async function getContent(lang: string) {
   try {

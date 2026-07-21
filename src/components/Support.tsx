@@ -1,20 +1,21 @@
 "use client";
 import { Icon } from "@/components/Icon";
 import { SUPPORT as STATIC_SUPPORT } from "@/data/content";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useMessages, useTranslations } from 'next-intl';
 
 export function Support() {
-  const { content } = useLanguage();
-  const SUPPORT = (content?.SUPPORT || STATIC_SUPPORT) as typeof STATIC_SUPPORT;
+  const messages = useMessages();
+  const t = useTranslations('Support');
+  const SUPPORT = (messages?.SUPPORT || STATIC_SUPPORT) as typeof STATIC_SUPPORT;
   return (
     <section id="participar" className="relative isolate overflow-hidden bg-brand-700 py-20 text-white lg:py-32">
       <div className="hero-grid absolute inset-0 -z-10 opacity-50" />
 
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">Motivos</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">{t('badge')}</p>
           <h2 className="mt-4 font-heading text-3xl text-white sm:text-4xl">
-            Por que participar do <span className="text-brand-subtle">SFS 2026</span>
+            {t('titulo')} <span className="text-brand-subtle">SFS 2026</span>
           </h2>
         </div>
 
@@ -38,7 +39,7 @@ export function Support() {
             href="#caminhos"
             className="inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
           >
-            Cadastre-se
+            {t('btnCadastrar')}
           </a>
         </div>
       </div>

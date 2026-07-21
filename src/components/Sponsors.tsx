@@ -1,10 +1,11 @@
 "use client";
 import { SPONSORS as STATIC_SPONSORS } from "@/data/content";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useMessages, useTranslations } from 'next-intl';
 
 export function Sponsors() {
-  const { content } = useLanguage();
-  const SPONSORS = (content?.SPONSORS || STATIC_SPONSORS) as typeof STATIC_SPONSORS;
+  const messages = useMessages();
+  const t = useTranslations('Sponsors');
+  const SPONSORS = (messages?.SPONSORS || STATIC_SPONSORS) as typeof STATIC_SPONSORS;
   // Duplicado para o loop infinito da esteira
   const track = [...SPONSORS, ...SPONSORS];
 
@@ -12,7 +13,7 @@ export function Sponsors() {
     <section className="bg-ink-50 py-16 lg:py-24">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <p className="text-center text-sm font-semibold uppercase tracking-wider text-ink-600">
-          Apoio institucional &amp; patrocinadores
+          {t('titulo')}
         </p>
 
         <div className="marquee mt-10">

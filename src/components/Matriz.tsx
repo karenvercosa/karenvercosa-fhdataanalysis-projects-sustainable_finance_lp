@@ -2,12 +2,13 @@
 import { Check, ArrowRight, Clock } from "lucide-react";
 import { Icon } from "@/components/Icon";
 import { PATHS as STATIC_PATHS } from "@/data/content";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useMessages, useTranslations } from 'next-intl';
 import { SponsorButton } from "@/components/SponsorContact";
 
 export function Matriz() {
-  const { content } = useLanguage();
-  const PATHS = (content?.PATHS || STATIC_PATHS) as typeof STATIC_PATHS;
+  const messages = useMessages();
+  const t = useTranslations('Matriz');
+  const PATHS = (messages?.PATHS || STATIC_PATHS) as typeof STATIC_PATHS;
   return (
     <section id="caminhos" className="relative isolate overflow-hidden bg-brand-700 py-20 text-white lg:py-32">
       <div className="hero-grid absolute inset-0 -z-10 opacity-60" />
@@ -15,12 +16,12 @@ export function Matriz() {
 
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">Como participar</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">{t('badge')}</p>
           <h2 className="mt-4 font-heading text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-            Escolha o seu caminho no ecossistema
+            {t('titulo')}
           </h2>
           <p className="mt-4 text-lg text-ink-200">
-            Tudo começa entrando na plataforma. Escolha o nível de acesso ideal para você — do gratuito ao estratégico.
+            {t('descricao')}
           </p>
         </div>
 
@@ -86,7 +87,7 @@ export function Matriz() {
                       </button>
                       <p className="mt-3 flex items-center justify-center gap-2 text-xs font-medium text-brand-subtle">
                         <Clock className="size-4" strokeWidth={2} aria-hidden />
-                        Plataforma em construção — em breve
+                        {t('emBreve')}
                       </p>
                     </>
                   )}

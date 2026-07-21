@@ -1,23 +1,22 @@
 "use client";
 import { Icon } from "@/components/Icon";
 import { PILLARS as STATIC_PILLARS } from "@/data/content";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useMessages, useTranslations } from 'next-intl';
 
 export function Opportunity() {
-  const { content } = useLanguage();
-  const PILLARS = (content?.PILLARS || STATIC_PILLARS) as typeof STATIC_PILLARS;
+  const messages = useMessages();
+  const t = useTranslations('Opportunity');
+  const PILLARS = (messages?.PILLARS || STATIC_PILLARS) as typeof STATIC_PILLARS;
   return (
     <section id="oportunidade" className="bg-ink-0 py-20 lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">O cenário</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">{t('badge')}</p>
           <h2 className="mt-4 text-3xl leading-tight text-brand-900 sm:text-4xl lg:text-[2.75rem]">
-            Trilhões em capital esperam por ativos verdes — mas faltam dados, padrões e conexões para destravá-los.
+            {t('titulo')}
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-ink-600">
-            A transição não é mais uma escolha de pauta ambiental: é a maior realocação de capital da nossa geração.
-            Quem entender as regras agora, lidera. O Sustainable Finance 2026 existe para resolver os gargalos que
-            travam essa virada.
+            {t('descricao')}
           </p>
         </div>
 

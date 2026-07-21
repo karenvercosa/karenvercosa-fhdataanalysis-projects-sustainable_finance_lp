@@ -1,22 +1,22 @@
 "use client";
 import { Icon } from "@/components/Icon";
 import { AUDIENCE as STATIC_AUDIENCE } from "@/data/content";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useMessages, useTranslations } from 'next-intl';
 
 export function Audience() {
-  const { content } = useLanguage();
-  const AUDIENCE = (content?.AUDIENCE || STATIC_AUDIENCE) as typeof STATIC_AUDIENCE;
+  const messages = useMessages();
+  const t = useTranslations('Audience');
+  const AUDIENCE = (messages?.AUDIENCE || STATIC_AUDIENCE) as typeof STATIC_AUDIENCE;
   return (
     <section id="publico" className="bg-ink-0 py-20 lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">Para quem é</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">{t('badge')}</p>
           <h2 className="mt-4 font-heading text-3xl text-brand-900 sm:text-4xl">
-            Feito para quem decide a transição verde
+            {t('titulo')}
           </h2>
           <p className="mt-4 text-lg text-ink-600">
-            Se você toma decisões de capital, risco, regulação ou inovação, este é o evento — e o ingresso — certo para
-            você.
+            {t('descricao')}
           </p>
         </div>
 

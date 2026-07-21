@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
 import { EVENT as STATIC_EVENT } from "@/data/content";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useMessages, useTranslations } from 'next-intl';
 
 // ---------------------------------------------------------------------------
 // Contexto — abre o modal "Seja um patrocinador" de qualquer botão da LP
@@ -52,8 +52,9 @@ export function SponsorButton({
 // Provider + Modal
 // ---------------------------------------------------------------------------
 export function SponsorModalProvider({ children }: { children: React.ReactNode }) {
-  const { content } = useLanguage();
-  const EVENT = (content?.EVENT || STATIC_EVENT) as typeof STATIC_EVENT;
+  const messages = useMessages();
+  const t = useTranslations('SponsorContact');
+  const EVENT = (messages?.EVENT || STATIC_EVENT) as typeof STATIC_EVENT;
   const [isOpen, setIsOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ nome: "", email: "", empresa: "", cargo: "", telefone: "" });
@@ -130,14 +131,14 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                   id="sponsor-modal-title"
                   className="text-center font-heading text-2xl text-brand-900 sm:text-3xl"
                 >
-                  Seja patrocinador ou curador
+                  {t('titulo')}
                 </h2>
 
                 {sent ? (
                   <div className="mt-8 rounded-lg bg-ink-50 p-6 text-center">
-                    <p className="font-heading text-lg text-brand-900">Quase lá!</p>
+                    <p className="font-heading text-lg text-brand-900">{t('quaseLa')}</p>
                     <p className="mt-2 text-sm leading-relaxed text-ink-600">
-                      Abrimos seu e-mail com os dados já preenchidos — basta enviar. Se nada abriu, escreva para{" "}
+                      {t('sucessoTexto')}
                       <a className="font-semibold text-brand-600 underline" href={`mailto:${EVENT.salesEmail}`}>
                         {EVENT.salesEmail}
                       </a>
@@ -148,18 +149,18 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                       onClick={close}
                       className="mt-6 rounded-md bg-brand-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-brand-700"
                     >
-                      Fechar
+                      {t('btnFechar')}
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="mt-8 space-y-6">
                     <label className="block">
-                      <span className={labelCls}>Nome:</span>
+                      <span className={labelCls}>{t('nome')}</span>
                       <input required value={form.nome} onChange={set("nome")} autoComplete="name" className={inputCls} />
                     </label>
 
                     <label className="block">
-                      <span className={labelCls}>E-mail:</span>
+                      <span className={labelCls}>{t('email')}</span>
                       <input
                         required
                         type="email"
@@ -171,7 +172,7 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                     </label>
 
                     <label className="block">
-                      <span className={labelCls}>Empresa:</span>
+                      <span className={labelCls}>{t('empresa')}</span>
                       <input
                         required
                         value={form.empresa}
@@ -182,7 +183,7 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                     </label>
 
                     <label className="block">
-                      <span className={labelCls}>Cargo:</span>
+                      <span className={labelCls}>{t('cargo')}</span>
                       <input
                         value={form.cargo}
                         onChange={set("cargo")}
@@ -192,7 +193,7 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                     </label>
 
                     <label className="block">
-                      <span className={labelCls}>Telefone:</span>
+                      <span className={labelCls}>{t('telefone')}</span>
                       <input
                         value={form.telefone}
                         onChange={set("telefone")}
@@ -208,7 +209,7 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                         type="submit"
                         className="rounded-md bg-brand-600 px-8 py-3 text-base font-semibold text-white shadow-cta transition-colors hover:bg-brand-700"
                       >
-                        Enviar
+                        {t('btnEnviar')}
                       </button>
                     </div>
                   </form>

@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { FAQ as STATIC_FAQ } from "@/data/content";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useMessages, useTranslations } from 'next-intl';
 
 export function Faq() {
-  const { content } = useLanguage();
-  const FAQ = (content?.FAQ || STATIC_FAQ) as typeof STATIC_FAQ;
+  const messages = useMessages();
+  const t = useTranslations('Faq');
+  const FAQ = (messages?.FAQ || STATIC_FAQ) as typeof STATIC_FAQ;
   // Accordion exclusivo (prevenção de sobrecarga cognitiva)
   const [open, setOpen] = useState<number | null>(0);
 
@@ -15,9 +16,9 @@ export function Faq() {
     <section id="faq" className="bg-ink-0 py-20 lg:py-32">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="reveal text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">Dúvidas frequentes</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">{t('badge')}</p>
           <h2 className="mt-4 font-heading text-3xl text-brand-900 sm:text-4xl">
-            Tudo o que você precisa saber para entrar no ecossistema
+            {t('titulo')}
           </h2>
         </div>
 
@@ -52,12 +53,12 @@ export function Faq() {
 
         {/* Reforço de CTA pós-FAQ */}
         <div className="reveal mt-12 rounded-lg bg-brand-900 p-8 text-center">
-          <p className="font-heading text-xl text-white">Entre no ecossistema do SFS 2026.</p>
+          <p className="font-heading text-xl text-white">{t('ctaTitulo')}</p>
           <a
             href="#caminhos"
             className="mt-4 inline-flex items-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 font-semibold text-brand-900 transition-colors hover:bg-white"
           >
-            Cadastre-se
+            {t('btnCadastrar')}
           </a>
         </div>
       </div>

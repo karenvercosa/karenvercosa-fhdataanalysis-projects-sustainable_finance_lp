@@ -1,0 +1,93 @@
+{
+  "Header": {
+    "sobre": "Sobre",
+    "conteudo": "Conteúdo",
+    "paraQuemE": "Para quem é",
+    "conducao": "Condução",
+    "comoParticipar": "Como participar",
+    "faq": "FAQ",
+    "cadastreSe": "Cadastre-se"
+  },
+  "Hero": {
+    "badge": "2ª edição • Goiânia 2026",
+    "tituloP1": "O maior evento de ",
+    "tituloDestaque": "finanças sustentáveis",
+    "tituloP2": " do Brasil",
+    "descricao": "Onde capital, agronegócio e inovação se encontram para construir a transição verde — com as ferramentas, os dados e as conexões certas para transformar negócios.",
+    "data": "Data",
+    "horario": "Horário",
+    "local": "Local",
+    "btnCadastrar": "Cadastre-se",
+    "btnPatrocinador": "Seja um patrocinador/curador"
+  },
+  "Opportunity": {
+    "badge": "O cenário",
+    "titulo": "Trilhões em capital esperam por ativos verdes — mas faltam dados, padrões e conexões para destravá-los.",
+    "descricao": "A transição verde não é mais uma escolha de pauta ambiental: é a maior realocação de capital da nossa geração. Quem entender as regras agora, lidera. O Sustainable Finance 2026 existe para resolver os gargalos que travam essa virada."
+  },
+  "Programacao": {
+    "badge": "Programação",
+    "titulo": "Trilhas de conteúdo",
+    "descricao": "Quatro trilhas temáticas cobrindo capital, regulação, inovação, descarbonização e bioeconomia. Toque para explorar os painéis de cada uma.",
+    "trilha": "Trilha"
+  },
+  "Speakers": {
+    "badge": "Quem você vai encontrar",
+    "titulo": "Keynote Speakers",
+    "descricao": "Líderes globais da economia, da regulação climática e do mercado financeiro confirmados para o palco principal.",
+    "mostrarMenos": "Mostrar menos",
+    "mostrarTodos": "Visualizar todos os palestrantes"
+  },
+  "Audience": {
+    "badge": "Para quem é",
+    "titulo": "Feito para quem decide a transição verde",
+    "descricao": "Se você toma decisões de capital, risco, regulação ou inovação, este é o evento — e o ingresso — certo para você."
+  },
+  "Host": {
+    "badge": "Condução",
+    "titulo": "Quem conduz o palco principal",
+    "mestreCerimonias": "Mestre de cerimônias"
+  },
+  "Matriz": {
+    "badge": "Como participar",
+    "titulo": "Escolha o seu caminho no ecossistema",
+    "descricao": "Tudo começa entrando na plataforma. Escolha o nível de acesso ideal para você — do gratuito ao estratégico.",
+    "emBreve": "Plataforma em construção, em breve"
+  },
+  "Sponsors": {
+    "titulo": "Apoio institucional & patrocinadores"
+  },
+  "Support": {
+    "badge": "Motivos",
+    "titulo": "Por que participar do",
+    "btnCadastrar": "Cadastre-se"
+  },
+  "Faq": {
+    "badge": "Dúvidas frequentes",
+    "titulo": "Tudo o que você precisa saber para entrar no ecossistema",
+    "ctaTitulo": "Entre no ecossistema do SFS 2026.",
+    "btnCadastrar": "Cadastre-se"
+  },
+  "Footer": {
+    "descricao": "O maior evento de finanças sustentáveis do Brasil. Goiânia, 04 de setembro de 2026.",
+    "colEvento": "Evento",
+    "colInstitucional": "Institucional",
+    "colContato": "Contato",
+    "linkPolitica": "Política de Privacidade",
+    "linkLgpd": "Conformidade LGPD",
+    "direitos": "© 2026 Sustainable Finance. Todos os direitos reservados.",
+    "lgpdTexto": "Tratamos seus dados em conformidade com a LGPD (Lei nº 13.709/2018)."
+  },
+  "SponsorContact": {
+    "titulo": "Seja patrocinador ou curador",
+    "quaseLa": "Quase lá!",
+    "sucessoTexto": "Abrimos seu e-mail com os dados já preenchidos — basta enviar. Se nada abriu, escreva para ",
+    "btnFechar": "Fechar",
+    "nome": "Nome:",
+    "email": "E-mail:",
+    "empresa": "Empresa:",
+    "cargo": "Cargo:",
+    "telefone": "Telefone:",
+    "btnEnviar": "Enviar"
+  }
+}

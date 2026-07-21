@@ -1,6 +1,8 @@
 import { 
   EVENT, METRICS, PILLARS, TRILHAS, SPEAKERS, AUDIENCE, CONSOLIDATION, HOST, SUPPORT, SPONSORS, PATHS, FAQ 
 } from "@/data/content";
+import uiPt from "@/messages/pt.json";
+import uiEn from "@/messages/en.json";
 
 export const SEED_DATA_PT = {
   EVENT,
@@ -14,7 +16,8 @@ export const SEED_DATA_PT = {
   SUPPORT,
   SPONSORS,
   PATHS,
-  FAQ
+  FAQ,
+  ...uiPt
 };
 
 export const SEED_DATA_EN = {
@@ -158,4 +161,5 @@ export const SEED_DATA_EN = {
     { q: "I want to sponsor or be a curator. How do I do it?", a: "Commercial quotas, sponsorship and corporate vouchers are handled outside the platform, directly with our team." },
     { q: "Is the event online or in-person?", a: "Both. The event takes place in-person in Goiânia and is broadcast live to platform members." },
   ],
+  ...uiEn
 };

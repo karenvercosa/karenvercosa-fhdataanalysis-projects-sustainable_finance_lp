@@ -19,12 +19,6 @@ import { SponsorModalProvider } from "@/components/SponsorContact";
 export default function Page() {
   return (
     <>
-      <a
-        href="#caminhos"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-subtle focus:px-4 focus:py-2 focus:text-brand-900"
-      >
-        Pular para como participar
-      </a>
 
       <SponsorModalProvider>
         <Header />
