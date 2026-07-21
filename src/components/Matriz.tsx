@@ -1,9 +1,13 @@
+"use client";
 import { Check, ArrowRight, Clock } from "lucide-react";
 import { Icon } from "@/components/Icon";
-import { PATHS } from "@/data/content";
+import { PATHS as STATIC_PATHS } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { SponsorButton } from "@/components/SponsorContact";
 
 export function Matriz() {
+  const { content } = useLanguage();
+  const PATHS = (content?.PATHS || STATIC_PATHS) as typeof STATIC_PATHS;
   return (
     <section id="caminhos" className="relative isolate overflow-hidden bg-brand-700 py-20 text-white lg:py-32">
       <div className="hero-grid absolute inset-0 -z-10 opacity-60" />

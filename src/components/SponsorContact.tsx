@@ -2,7 +2,8 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
-import { EVENT } from "@/data/content";
+import { EVENT as STATIC_EVENT } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // ---------------------------------------------------------------------------
 // Contexto — abre o modal "Seja um patrocinador" de qualquer botão da LP
@@ -51,6 +52,8 @@ export function SponsorButton({
 // Provider + Modal
 // ---------------------------------------------------------------------------
 export function SponsorModalProvider({ children }: { children: React.ReactNode }) {
+  const { content } = useLanguage();
+  const EVENT = (content?.EVENT || STATIC_EVENT) as typeof STATIC_EVENT;
   const [isOpen, setIsOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ nome: "", email: "", empresa: "", cargo: "", telefone: "" });

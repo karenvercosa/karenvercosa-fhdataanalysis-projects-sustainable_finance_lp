@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const LINKS = [
   { href: "#oportunidade", label: "Sobre" },
@@ -15,6 +16,7 @@ const LINKS = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { lang, setLang } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -48,6 +50,21 @@ export function Header() {
 
           {/* Ações */}
           <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 text-sm font-semibold text-white mr-2">
+              <button
+                onClick={() => setLang("PT")}
+                className={`transition-colors hover:text-brand-subtle ${lang === "PT" ? "text-brand-subtle" : ""}`}
+              >
+                PT
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                onClick={() => setLang("EN")}
+                className={`transition-colors hover:text-brand-subtle ${lang === "EN" ? "text-brand-subtle" : ""}`}
+              >
+                EN
+              </button>
+            </div>
             <a
               href="#caminhos"
               className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-brand-subtle px-3 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-colors hover:bg-white sm:px-4"
@@ -80,6 +97,27 @@ export function Header() {
                   {l.label}
                 </a>
               ))}
+              <div className="mt-2 flex items-center justify-center gap-2 text-sm font-semibold text-white">
+                <button
+                  onClick={() => {
+                    setLang("PT");
+                    setOpen(false);
+                  }}
+                  className={`transition-colors ${lang === "PT" ? "text-brand-subtle" : ""}`}
+                >
+                  PT
+                </button>
+                <span className="text-white/30">|</span>
+                <button
+                  onClick={() => {
+                    setLang("EN");
+                    setOpen(false);
+                  }}
+                  className={`transition-colors ${lang === "EN" ? "text-brand-subtle" : ""}`}
+                >
+                  EN
+                </button>
+              </div>
               <a
                 href="#caminhos"
                 onClick={() => setOpen(false)}

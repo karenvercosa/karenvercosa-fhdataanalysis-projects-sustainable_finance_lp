@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import { ChevronDown, Leaf } from "lucide-react";
-import { TRILHAS } from "@/data/content";
+import { TRILHAS as STATIC_TRILHAS } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Programacao() {
+  const { content } = useLanguage();
+  const TRILHAS = (content?.TRILHAS || STATIC_TRILHAS) as typeof STATIC_TRILHAS;
   // Accordion de trilhas — independentes; a primeira abre por padrão.
   const [open, setOpen] = useState<Record<number, boolean>>({ 1: true });
   const toggle = (n: number) => setOpen((s) => ({ ...s, [n]: !s[n] }));

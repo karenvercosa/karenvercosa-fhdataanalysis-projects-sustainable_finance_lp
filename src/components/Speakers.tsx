@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
-import { SPEAKERS } from "@/data/content";
+import { SPEAKERS as STATIC_SPEAKERS } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Speakers() {
+  const { content } = useLanguage();
+  const SPEAKERS = (content?.SPEAKERS || STATIC_SPEAKERS) as typeof STATIC_SPEAKERS;
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? SPEAKERS : SPEAKERS.filter((s) => s.featured);
 

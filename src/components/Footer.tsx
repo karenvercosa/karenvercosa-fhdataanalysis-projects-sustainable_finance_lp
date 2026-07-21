@@ -1,6 +1,10 @@
-import { EVENT } from "@/data/content";
+"use client";
+import { EVENT as STATIC_EVENT } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
+  const { content } = useLanguage();
+  const EVENT = (content?.EVENT || STATIC_EVENT) as typeof STATIC_EVENT;
   return (
     <footer className="bg-ink-1000 text-ink-200">
       <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">

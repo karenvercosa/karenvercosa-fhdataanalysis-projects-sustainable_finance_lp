@@ -1,7 +1,11 @@
+"use client";
 import { Icon } from "@/components/Icon";
-import { PILLARS } from "@/data/content";
+import { PILLARS as STATIC_PILLARS } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Opportunity() {
+  const { content } = useLanguage();
+  const PILLARS = (content?.PILLARS || STATIC_PILLARS) as typeof STATIC_PILLARS;
   return (
     <section id="oportunidade" className="bg-ink-0 py-20 lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">

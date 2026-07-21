@@ -1,6 +1,10 @@
-import { SPONSORS } from "@/data/content";
+"use client";
+import { SPONSORS as STATIC_SPONSORS } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Sponsors() {
+  const { content } = useLanguage();
+  const SPONSORS = (content?.SPONSORS || STATIC_SPONSORS) as typeof STATIC_SPONSORS;
   // Duplicado para o loop infinito da esteira
   const track = [...SPONSORS, ...SPONSORS];
 

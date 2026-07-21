@@ -1,8 +1,12 @@
+"use client";
 import { Mic } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
-import { HOST } from "@/data/content";
+import { HOST as STATIC_HOST } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Host() {
+  const { content } = useLanguage();
+  const HOST = (content?.HOST || STATIC_HOST) as typeof STATIC_HOST;
   return (
     <section id="conducao" className="bg-brand-900 py-20 text-white lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">

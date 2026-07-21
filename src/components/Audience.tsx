@@ -1,7 +1,11 @@
+"use client";
 import { Icon } from "@/components/Icon";
-import { AUDIENCE } from "@/data/content";
+import { AUDIENCE as STATIC_AUDIENCE } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Audience() {
+  const { content } = useLanguage();
+  const AUDIENCE = (content?.AUDIENCE || STATIC_AUDIENCE) as typeof STATIC_AUDIENCE;
   return (
     <section id="publico" className="bg-ink-0 py-20 lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">

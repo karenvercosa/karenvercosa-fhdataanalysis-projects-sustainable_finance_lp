@@ -1,8 +1,14 @@
+"use client";
 import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
-import { EVENT, METRICS } from "@/data/content";
+import { EVENT as STATIC_EVENT, METRICS as STATIC_METRICS } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { SponsorButton } from "@/components/SponsorContact";
 
 export function Hero() {
+  const { content } = useLanguage();
+  const EVENT = (content?.EVENT || STATIC_EVENT) as typeof STATIC_EVENT;
+  const METRICS = (content?.METRICS || STATIC_METRICS) as typeof STATIC_METRICS;
+
   return (
     <section className="relative isolate overflow-hidden bg-brand-900 pt-16 lg:pt-20">
       {/* Camadas de fundo: arte oficial + overlay verde p/ contraste */}

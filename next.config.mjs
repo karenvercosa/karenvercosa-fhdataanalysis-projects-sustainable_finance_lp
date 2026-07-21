@@ -6,6 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: "standalone",
   // Evita que o Next infira a raiz errada (há outros lockfiles no caminho)
   outputFileTracingRoot: __dirname,
 };

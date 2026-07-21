@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { FAQ } from "@/data/content";
+import { FAQ as STATIC_FAQ } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Faq() {
+  const { content } = useLanguage();
+  const FAQ = (content?.FAQ || STATIC_FAQ) as typeof STATIC_FAQ;
   // Accordion exclusivo (prevenção de sobrecarga cognitiva)
   const [open, setOpen] = useState<number | null>(0);
 
