@@ -88,7 +88,12 @@
     "empresa": "Company:",
     "cargo": "Job Title:",
     "telefone": "Phone:",
-    "btnEnviar": "Send"
+    "btnEnviar": "Send",
+    "enviando": "Sending...",
+    "popupEnviado": "E-mail sent successfully!",
+    "sucessoTitulo": "Platform available soon",
+    "sucessoDesc": "We received your interest! Our team will get in touch and the user platform will be available soon.",
+    "erroEnvio": "Could not send. Please try again."
   },
   "RegisterPage": {
     "titulo": "Create your account",
@@ -98,6 +103,7 @@
     "patrocinadorTitulo": "Become a Sponsor",
     "patrocinadorDesc": "Showcase your brand to sustainable finance leaders, be highlighted on the platform, and access exclusive networking features.",
     "btnCadastreGratis": "Register for Free",
+    "btnQueroPatrocinar": "I want to be a Sponsor / Curator",
     "labelNome": "First Name",
     "placeholderNome": "Your first name",
     "labelSobrenome": "Last Name",

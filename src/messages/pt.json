@@ -88,7 +88,12 @@
     "empresa": "Empresa:",
     "cargo": "Cargo:",
     "telefone": "Telefone:",
-    "btnEnviar": "Enviar"
+    "btnEnviar": "Enviar",
+    "enviando": "Enviando...",
+    "popupEnviado": "E-mail enviado com sucesso!",
+    "sucessoTitulo": "Plataforma disponível em breve",
+    "sucessoDesc": "Recebemos seu interesse! Nossa equipe entrará em contato e a plataforma de usuários será liberada em breve.",
+    "erroEnvio": "Não foi possível enviar. Tente novamente."
   },
   "RegisterPage": {
     "titulo": "Crie sua conta",
@@ -98,6 +103,7 @@
     "patrocinadorTitulo": "Seja um Patrocinador",
     "patrocinadorDesc": "Apresente sua marca para líderes em finanças sustentáveis, tenha destaque na plataforma e acesso a recursos exclusivos de networking.",
     "btnCadastreGratis": "Cadastre-se Gratuitamente",
+    "btnQueroPatrocinar": "Quero ser Patrocinador / Curador",
     "labelNome": "Nome",
     "placeholderNome": "Seu nome",
     "labelSobrenome": "Sobrenome",

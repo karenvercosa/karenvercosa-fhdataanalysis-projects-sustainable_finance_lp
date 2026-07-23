@@ -50,7 +50,7 @@ export function Wrapper({
 export function Header({ titulo }: { titulo: string }) {
   return (
     <div className="flex flex-col items-center gap-2 text-center">
-      <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-14" />
+      <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-12 w-auto" />
       <h1 className="text-h2 text-white font-heading">{titulo}</h1>
     </div>
   );

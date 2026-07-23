@@ -1,9 +1,8 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { X } from "lucide-react";
-import { EVENT as STATIC_EVENT } from "@/data/content";
-import { useMessages, useTranslations } from 'next-intl';
+import { X, CheckCircle2 } from "lucide-react";
+import { useTranslations } from 'next-intl';
 
 // ---------------------------------------------------------------------------
 // Contexto — abre o modal "Seja um patrocinador" de qualquer botão da LP
@@ -52,15 +51,18 @@ export function SponsorButton({
 // Provider + Modal
 // ---------------------------------------------------------------------------
 export function SponsorModalProvider({ children }: Readonly<{ children: React.ReactNode }>) {
-  const messages = useMessages();
   const t = useTranslations('SponsorContact');
-  const EVENT = (messages?.EVENT || STATIC_EVENT) as typeof STATIC_EVENT;
   const [isOpen, setIsOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [popup, setPopup] = useState(false);
   const [form, setForm] = useState({ nome: "", email: "", empresa: "", cargo: "", telefone: "" });
 
   const open = useCallback(() => {
     setSent(false);
+    setErrorMsg(null);
+    setPopup(false);
     setIsOpen(true);
   }, []);
   const close = useCallback(() => setIsOpen(false), []);
@@ -82,22 +84,34 @@ export function SponsorModalProvider({ children }: Readonly<{ children: React.Re
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  // Sem backend: encaminha o lead por e-mail com os dados preenchidos.
-  // Substituir por POST no endpoint/CRM quando existir.
-  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+  // Envia o lead pelo backend (Resend). Mostra popup "e-mail enviado" e,
+  // em seguida, o card "plataforma disponível em breve".
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
-    const body = [
-      `Nome: ${form.nome}`,
-      `E-mail: ${form.email}`,
-      `Empresa: ${form.empresa}`,
-      `Cargo: ${form.cargo}`,
-      `Telefone: ${form.telefone}`,
-    ].join("\n");
-    const href = `mailto:${EVENT.salesEmail}?subject=${encodeURIComponent(
-      "Seja um patrocinador / curador — SFS 2026"
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = href;
-    setSent(true);
+    if (sending) return;
+    setSending(true);
+    setErrorMsg(null);
+    try {
+      const res = await fetch("/api/patrocinador", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMsg(data.error || t("erroEnvio"));
+        return;
+      }
+      setPopup(true);
+      setTimeout(() => {
+        setPopup(false);
+        setSent(true);
+      }, 2200);
+    } catch {
+      setErrorMsg(t("erroEnvio"));
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -139,19 +153,18 @@ export function SponsorModalProvider({ children }: Readonly<{ children: React.Re
                 </h2>
 
                 {sent ? (
-                  <div className="mt-8 rounded-lg bg-ink-50 p-6 text-center">
-                    <p className="font-heading text-lg text-brand-900">{t('quaseLa')}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-600">
-                      {t('sucessoTexto')}{" "}
-                      <a className="font-semibold text-brand-600 underline" href={`mailto:${EVENT.salesEmail}`}>
-                        {EVENT.salesEmail}
-                      </a>
-                      {"."}
-                    </p>
+                  <div className="mt-8 flex flex-col items-center gap-4 rounded-lg bg-ink-50 p-6 text-center">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-100 text-brand-600">
+                      <CheckCircle2 className="h-7 w-7" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="font-heading text-lg text-brand-900">{t('sucessoTitulo')}</p>
+                      <p className="text-sm leading-relaxed text-ink-600">{t('sucessoDesc')}</p>
+                    </div>
                     <button
                       type="button"
                       onClick={close}
-                      className="mt-6 rounded-md bg-brand-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-brand-700"
+                      className="mt-2 rounded-md bg-brand-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-brand-700"
                     >
                       {t('btnFechar')}
                     </button>
@@ -208,12 +221,14 @@ export function SponsorModalProvider({ children }: Readonly<{ children: React.Re
                       />
                     </label>
 
+                    {errorMsg && <p className="text-sm font-medium text-red-600">{errorMsg}</p>}
                     <div className="flex justify-end pt-2">
                       <button
                         type="submit"
-                        className="rounded-md bg-brand-600 px-8 py-3 text-base font-semibold text-white shadow-cta transition-colors hover:bg-brand-700"
+                        disabled={sending}
+                        className="rounded-md bg-brand-600 px-8 py-3 text-base font-semibold text-white shadow-cta transition-colors hover:bg-brand-700 disabled:opacity-50"
                       >
-                        {t('btnEnviar')}
+                        {sending ? t('enviando') : t('btnEnviar')}
                       </button>
                     </div>
                   </form>
@@ -221,6 +236,15 @@ export function SponsorModalProvider({ children }: Readonly<{ children: React.Re
               </div>
             </div>
         </dialog>
+      )}
+
+      {popup && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/50 p-4">
+          <div className="flex animate-in fade-in zoom-in-95 flex-col items-center gap-3 rounded-lg bg-white p-8 text-center shadow-xl duration-300">
+            <CheckCircle2 className="h-12 w-12 text-brand-600" />
+            <p className="font-heading text-lg text-brand-900">{t('popupEnviado')}</p>
+          </div>
+        </div>
       )}
     </SponsorCtx.Provider>
   );

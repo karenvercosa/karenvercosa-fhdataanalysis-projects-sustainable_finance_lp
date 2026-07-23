@@ -181,7 +181,7 @@ export default function AssinaturaPage() {
     return (
       <Wrapper showPopup={popup} popupText={popupText}>
         <div className="flex animate-in fade-in zoom-in-95 flex-col items-center gap-4 py-6 text-center duration-300">
-          <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-16" />
+          <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-12 w-auto" />
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-[#8DD596]">
             <CheckCircle2 className="h-8 w-8" />
           </div>

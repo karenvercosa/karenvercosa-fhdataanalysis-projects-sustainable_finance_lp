@@ -9,6 +9,7 @@ import { LegalModal } from "@/components/legal/LegalModal";
 import { CONSENTIMENTO_KEY, type LegalDocId } from "@/data/legal";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
+import { useSponsorModal } from "@/components/SponsorContact";
 import { useTranslations } from "next-intl";
 
 type Phase1Data = { firstName: string; lastName: string; email: string; phone: string; password: string; };
@@ -48,7 +49,8 @@ export default function RegisterPage() {
 
   // Controle de abas
   const [activeTab, setActiveTab] = useState<"participante" | "patrocinador">("participante");
-  const [showSponsorForm, setShowSponsorForm] = useState(false);
+  // Abre o modal de patrocínio/curadoria (envio por e-mail).
+  const { open: openSponsor } = useSponsorModal();
 
   // Sem redirecionamento automático por enquanto.
   if (isAuthenticated) {
@@ -137,7 +139,7 @@ export default function RegisterPage() {
         <img src="/img/login-bg.png" alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="relative z-10 w-full max-w-md space-y-6 rounded-md bg-[rgba(25,48,43,0.92)] p-6 backdrop-blur-sm shadow-xl">
           <div className="flex animate-in fade-in zoom-in-95 flex-col items-center gap-4 py-6 text-center duration-300">
-            <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-16" />
+            <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-12 w-auto" />
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-[#8DD596]">
               <CheckCircle2 className="h-8 w-8" />
             </div>
@@ -165,7 +167,7 @@ export default function RegisterPage() {
         className="relative z-10 w-full max-w-md space-y-6 rounded-md bg-[rgba(25,48,43,0.92)] p-6 backdrop-blur-sm shadow-xl"
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-16" />
+          <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-12 w-auto" />
           <h1 className="text-h2 text-white font-heading">{t('titulo')}</h1>
           <p className="text-body text-white/80">{t('subtitulo')}</p>
         </div>
@@ -174,10 +176,7 @@ export default function RegisterPage() {
         <div className="flex w-full overflow-hidden rounded-md border border-white/20 bg-white/5 p-1">
           <button
             type="button"
-            onClick={() => {
-              setActiveTab("participante");
-              setShowSponsorForm(false);
-            }}
+            onClick={() => setActiveTab("participante")}
             className={cn(
               "flex-1 rounded-sm py-2 text-center text-body-sm font-medium transition-all duration-300",
               activeTab === "participante" 
@@ -201,7 +200,7 @@ export default function RegisterPage() {
           </button>
         </div>
 
-        {activeTab === "patrocinador" && !showSponsorForm ? (
+        {activeTab === "patrocinador" ? (
           <div className="flex animate-in fade-in zoom-in-95 flex-col items-center gap-4 py-6 text-center duration-300">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-[#8DD596]">
               <Building2 className="h-8 w-8" />
@@ -214,10 +213,10 @@ export default function RegisterPage() {
             </div>
             <button
               type="button"
-              onClick={() => setShowSponsorForm(true)}
+              onClick={openSponsor}
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-sm bg-[#8DD596] px-6 py-3 font-semibold text-[#102823] shadow-card transition-all hover:brightness-110 active:brightness-95"
             >
-              {t('btnCadastreGratis')} <ArrowRight className="h-4 w-4" />
+              {t('btnQueroPatrocinar')} <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         ) : (

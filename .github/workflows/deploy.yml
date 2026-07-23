@@ -1,0 +1,151 @@
+name: Deploy Next.js to Production
+
+on:
+  push:
+    branches: [main]
+
+env:
+  FRONT_IMAGE_NAME: "${{ secrets.DOCKER_HUB_USERNAME }}/sustainable-finance:front-v1.0.0"
+  DB_IMAGE_NAME: "${{ secrets.DOCKER_HUB_USERNAME }}/sustainable-finance:db-v1.0.0"
+  REDIS_IMAGE_NAME: "${{ secrets.DOCKER_HUB_USERNAME }}/sustainable-finance:redis-v1.0.0"
+
+jobs:
+  test:
+    name: Test and Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Run Tests
+        run: yarn test
+
+  deploy:
+    name: Build, Scan and Deploy
+    needs: test # Só inicia se os testes passarem
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Generate DB Init Script
+        run: npx prisma@5.22.0 migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/init.sql
+
+      - name: Build local FRONT image for Trivy Scan
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true # Apenas carrega no Docker local, não faz push ainda
+          tags: ${{ env.FRONT_IMAGE_NAME }}
+          build-args: |
+            DATABASE_URL=postgres://user:pass@localhost:5432/dummy_db
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build local DB image for Trivy Scan
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile.db
+          load: true
+          tags: ${{ env.DB_IMAGE_NAME }}
+
+      - name: Build local REDIS image for Trivy Scan
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile.redis
+          load: true
+          tags: ${{ env.REDIS_IMAGE_NAME }}
+
+      - name: Run Trivy Vulnerability Scanner on FRONT
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ env.FRONT_IMAGE_NAME }}'
+          format: 'table'
+          exit-code: '0' # Falha a pipeline se encontrar vulnerabilidades
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Run Trivy Vulnerability Scanner on DB
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ env.DB_IMAGE_NAME }}'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Run Trivy Vulnerability Scanner on REDIS
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ env.REDIS_IMAGE_NAME }}'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Push FRONT to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true # Agora faz o push oficial
+          tags: ${{ env.FRONT_IMAGE_NAME }}
+          build-args: |
+            DATABASE_URL=postgres://user:pass@localhost:5432/dummy_db
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Push DB to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile.db
+          push: true
+          tags: ${{ env.DB_IMAGE_NAME }}
+
+      - name: Push REDIS to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile.redis
+          push: true
+          tags: ${{ env.REDIS_IMAGE_NAME }}
+
+      - name: Rollout on K3s
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            echo "🚀 Iniciando Rollout no Kubernetes..."
+            KUBECONFIG=/etc/rancher/k3s/k3s.yaml /usr/local/bin/kubectl rollout restart deployment nextjs -n apps
+            echo "📊 Aguardando estabilização..."
+            KUBECONFIG=/etc/rancher/k3s/k3s.yaml /usr/local/bin/kubectl rollout status deployment nextjs -n apps --timeout=120s
+            echo "✅ Deploy Concluído!"

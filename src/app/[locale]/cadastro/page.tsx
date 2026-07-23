@@ -1,5 +1,6 @@
 import RegisterPage from "@/components/RegisterPage";
 import { InterestsProvider } from "@/components/context/InterestsContext";
+import { SponsorModalProvider } from "@/components/SponsorContact";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -15,9 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function Cadastro() {
   return (
     <main>
-      <InterestsProvider>
-        <RegisterPage />
-      </InterestsProvider>
+      <SponsorModalProvider>
+        <InterestsProvider>
+          <RegisterPage />
+        </InterestsProvider>
+      </SponsorModalProvider>
     </main>
   );
 }
