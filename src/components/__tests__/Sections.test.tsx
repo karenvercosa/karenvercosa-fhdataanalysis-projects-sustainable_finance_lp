@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { renderWithIntl } from '@/lib/test/render';
 
@@ -68,7 +68,7 @@ describe('Speakers', () => {
     expect(screen.queryByText('Mathias Cormann')).not.toBeInTheDocument();
 
     const toggle = getByRole('button');
-    toggle.click();
+    fireEvent.click(toggle);
     expect(await screen.findByText('Mathias Cormann')).toBeInTheDocument();
   });
 });

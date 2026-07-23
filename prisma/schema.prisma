@@ -192,22 +192,34 @@ model CommitteeMember {
 
 model Usuario {
   id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tipoPessoa          TipoPessoa @map("tipo_pessoa")
+  tipoPessoa          TipoPessoa @default(PF) @map("tipo_pessoa")
   nomeCompleto        String?    @map("nome_completo") @db.VarChar(180)
-  cpf                 String?    @unique @db.VarChar(14)
+  // Armazenado mascarado por privacidade: apenas os 3 primeiros dígitos (ex.: 139.***.***-**).
+  cpf                 String?    @db.VarChar(14)
   razaoSocial         String?    @map("razao_social") @db.VarChar(180)
   nomeFantasia        String?    @map("nome_fantasia") @db.VarChar(180)
   cnpj                String?    @unique @db.VarChar(18)
   email               String     @unique @db.VarChar(180)
-  senhaHash           String     @map("senha_hash")
+  // O hash da senha do cadastro via Better Auth fica na tabela `account`;
+  // por isso este campo passou a ser opcional.
+  senhaHash           String?    @map("senha_hash")
   telefone            String?    @db.VarChar(20)
   cargo               String?    @db.VarChar(120)
   empresaNome         String?    @map("empresa_nome") @db.VarChar(180)
   avatarUrl           String?    @map("avatar_url")
   bio                 String?
   ativo               Boolean    @default(true)
+  emailVerified       Boolean    @default(false) @map("email_verified")
+  // ID do cliente no Asaas (cus_...), para não recadastrar a cada cobrança.
+  asaasCustomerId     String?    @map("asaas_customer_id") @db.VarChar(50)
   criadoEm            DateTime   @default(now()) @db.Timestamptz @map("criado_em")
   atualizadoEm        DateTime   @default(now()) @updatedAt @db.Timestamptz @map("atualizado_em")
+
+  // Relações exigidas pelo Better Auth (sessões e login social)
+  accounts               Account[]
+  sessions               Session[]
+
+  assinaturas            AssinaturaPlataforma[]
 
   perfis                 UsuarioPerfil[]
   palestras              PalestraPalestrante[]
@@ -529,4 +541,75 @@ model Notificacao {
 
   @@index([usuarioId, lida])
   @@map("notificacao")
+}
+
+// -----------------------------------------------------------------------------
+// MODELS - BETTER AUTH (sessões, contas e verificação)
+// -----------------------------------------------------------------------------
+
+model Account {
+  id                    String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  accountId             String
+  providerId            String
+  userId                String    @db.Uuid
+  user                  Usuario   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Session {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String   @db.Uuid
+  user      Usuario  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Verification {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@map("verification")
+}
+
+// -----------------------------------------------------------------------------
+// MODEL - ASSINATURA DA PLATAFORMA (Asaas)
+// -----------------------------------------------------------------------------
+
+model AssinaturaPlataforma {
+  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  usuarioId           String   @map("usuario_id") @db.Uuid
+  usuario             Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  asaasSubscriptionId String?  @map("asaas_subscription_id") @db.VarChar(50)
+  asaasPaymentId      String?  @map("asaas_payment_id") @db.VarChar(50)
+  billingType         String   @map("billing_type") @db.VarChar(20)
+  internacional       Boolean  @default(false)
+  valor               Decimal  @db.Decimal(10, 2)
+  // pendente | ativa | cancelada
+  status              String   @default("pendente") @db.VarChar(20)
+  criadoEm            DateTime @default(now()) @db.Timestamptz @map("criado_em")
+  atualizadoEm        DateTime @default(now()) @updatedAt @db.Timestamptz @map("atualizado_em")
+
+  @@index([asaasPaymentId])
+  @@index([asaasSubscriptionId])
+  @@map("assinatura_plataforma")
 }

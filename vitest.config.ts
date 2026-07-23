@@ -32,7 +32,8 @@ export default defineConfig({
       ]
     },
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, './src'),
+      'next/navigation': path.resolve(__dirname, './src/lib/test/next-navigation-mock.ts')
     }
   },
 })

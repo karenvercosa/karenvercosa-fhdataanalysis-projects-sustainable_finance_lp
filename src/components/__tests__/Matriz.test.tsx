@@ -1,5 +1,13 @@
 import { screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+vi.mock('@/i18n/navigation', () => ({
+  Link: ({ children, href }: any) => <a href={href}>{children}</a>,
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  usePathname: () => '',
+  useSearchParams: () => new URLSearchParams(),
+  redirect: vi.fn(),
+}));
 import { renderWithIntl } from '@/lib/test/render';
 import { Matriz } from '../Matriz';
 
@@ -16,7 +24,7 @@ describe('Matriz', () => {
     const links = screen.getAllByRole('link');
     // Membro e assinatura viram <a>; contato vira <button> (SponsorButton).
     expect(links.length).toBeGreaterThanOrEqual(2);
-    expect(links.some((a) => a.getAttribute('href')?.includes('localhost:3001'))).toBe(true);
+    expect(links.some((a) => a.getAttribute('href')?.includes('/cadastro'))).toBe(true);
   });
 
   it('lista os benefícios de cada caminho', () => {

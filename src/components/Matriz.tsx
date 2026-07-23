@@ -4,11 +4,13 @@ import { Icon } from "@/components/Icon";
 import { PATHS as STATIC_PATHS } from "@/data/content";
 import { useMessages, useTranslations } from 'next-intl';
 import { SponsorButton } from "@/components/SponsorContact";
+import { Link } from "@/i18n/navigation";
 
 export function Matriz() {
   const messages = useMessages();
   const t = useTranslations('Matriz');
   const PATHS = (messages?.PATHS || STATIC_PATHS) as typeof STATIC_PATHS;
+
   return (
     <section id="caminhos" className="relative isolate overflow-hidden bg-brand-700 py-20 text-white lg:py-32">
       <div className="hero-grid absolute inset-0 -z-10 opacity-60" />
@@ -31,7 +33,6 @@ export function Matriz() {
             const isMembro = i === 0; // path.key === "membro"
             const isAssinatura = i === 1; // path.key === "assinatura"
 
-            // CTA extraído para evitar ternário aninhado (S3358)
             let cta: React.ReactNode;
             if (isContact) {
               cta = (
@@ -40,25 +41,25 @@ export function Matriz() {
                   <ArrowRight className="size-5" strokeWidth={2.2} />
                 </SponsorButton>
               );
-            } else if (isMembro) {
+            } else if (isMembro){
               cta = (
-                <a
-                  href={process.env.NEXT_PUBLIC_SIGNUP_URL || "http://localhost:3001"}
+                <Link
+                  href="/cadastro"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
                 >
                   {path.cta}
                   <ArrowRight className="size-5" strokeWidth={2.2} />
-                </a>
+                </Link>
               );
-            } else if (isAssinatura) {
+            } else if (isAssinatura){
               cta = (
-                <a
-                  href={process.env.NEXT_PUBLIC_SUBSCRIBE_URL || "http://localhost:3001"}
+                <Link
+                  href="/assinar"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
                 >
                   {path.cta}
                   <ArrowRight className="size-5" strokeWidth={2.2} />
-                </a>
+                </Link>
               );
             } else {
               cta = (

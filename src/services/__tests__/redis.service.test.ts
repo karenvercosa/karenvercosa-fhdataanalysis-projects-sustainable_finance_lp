@@ -28,7 +28,7 @@ describe('getContent (cache Redis)', () => {
   it('cache HIT: retorna do Redis sem tocar no banco', async () => {
     get.mockResolvedValue(JSON.stringify({ from: 'cache' }));
     const data = await getContent('pt');
-    expect(get).toHaveBeenCalledWith('content:PT');
+    expect(get).toHaveBeenCalledWith('content:v3:PT');
     expect(data).toEqual({ from: 'cache' });
     expect(getContentFromDb).not.toHaveBeenCalled();
   });
@@ -39,7 +39,7 @@ describe('getContent (cache Redis)', () => {
     const data = await getContent('en');
     expect(getContentFromDb).toHaveBeenCalledWith('en');
     expect(set).toHaveBeenCalledWith(
-      'content:EN',
+      'content:v3:EN',
       JSON.stringify({ from: 'db' }),
       'EX',
       604800,

@@ -8,7 +8,7 @@ const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379", {
 
 export async function getContent(lang: string) {
   try {
-    const key = `content:${lang.toUpperCase()}`;
+    const key = `content:v3:${lang.toUpperCase()}`;
     const cached = await redis.get(key);
 
     if (cached) {
