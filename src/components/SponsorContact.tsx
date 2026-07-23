@@ -28,11 +28,11 @@ export function SponsorButton({
   className,
   children,
   onClick,
-}: {
+}: Readonly<{
   className?: string;
   children: React.ReactNode;
   onClick?: () => void;
-}) {
+}>) {
   const { open } = useSponsorModal();
   return (
     <button
@@ -51,7 +51,7 @@ export function SponsorButton({
 // ---------------------------------------------------------------------------
 // Provider + Modal
 // ---------------------------------------------------------------------------
-export function SponsorModalProvider({ children }: { children: React.ReactNode }) {
+export function SponsorModalProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const messages = useMessages();
   const t = useTranslations('SponsorContact');
   const EVENT = (messages?.EVENT || STATIC_EVENT) as typeof STATIC_EVENT;
@@ -83,8 +83,8 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   // Sem backend: encaminha o lead por e-mail com os dados preenchidos.
-  // TODO: trocar por POST no endpoint/CRM quando existir.
-  function handleSubmit(e: React.FormEvent) {
+  // Substituir por POST no endpoint/CRM quando existir.
+  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     const body = [
       `Nome: ${form.nome}`,
@@ -105,17 +105,21 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
       {children}
 
       {isOpen && (
-        <div
-          className="fixed inset-0 z-[60] overflow-y-auto bg-black/60 backdrop-blur-sm"
-          role="dialog"
+        <dialog
+          open
           aria-modal="true"
           aria-labelledby="sponsor-modal-title"
+          className="fixed inset-0 z-[60] m-0 flex h-full max-h-none w-full max-w-none items-end justify-center overflow-y-auto border-0 bg-black/60 p-0 backdrop-blur-sm sm:items-center sm:p-4"
         >
-          <div
-            className="flex min-h-full items-end justify-center sm:items-center sm:p-4"
-            onMouseDown={(e) => e.target === e.currentTarget && close()}
-          >
-            <div className="relative w-full max-w-lg rounded-t-lg bg-ink-0 shadow-card sm:my-8 sm:rounded-lg">
+          {/* Backdrop clicável para fechar (botão nativo e acessível) */}
+          <button
+            type="button"
+            aria-label="Fechar"
+            tabIndex={-1}
+            onClick={close}
+            className="fixed inset-0 -z-10 size-full cursor-default bg-transparent"
+          />
+          <div className="relative w-full max-w-lg rounded-t-lg bg-ink-0 shadow-card sm:my-8 sm:rounded-lg">
               {/* Fechar */}
               <button
                 type="button"
@@ -138,11 +142,11 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                   <div className="mt-8 rounded-lg bg-ink-50 p-6 text-center">
                     <p className="font-heading text-lg text-brand-900">{t('quaseLa')}</p>
                     <p className="mt-2 text-sm leading-relaxed text-ink-600">
-                      {t('sucessoTexto')}
+                      {t('sucessoTexto')}{" "}
                       <a className="font-semibold text-brand-600 underline" href={`mailto:${EVENT.salesEmail}`}>
                         {EVENT.salesEmail}
                       </a>
-                      .
+                      {"."}
                     </p>
                     <button
                       type="button"
@@ -216,8 +220,7 @@ export function SponsorModalProvider({ children }: { children: React.ReactNode }
                 )}
               </div>
             </div>
-          </div>
-        </div>
+        </dialog>
       )}
     </SponsorCtx.Provider>
   );

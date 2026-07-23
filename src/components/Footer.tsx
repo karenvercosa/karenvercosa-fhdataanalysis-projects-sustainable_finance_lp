@@ -33,8 +33,8 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               <li><a href="#caminhos" className="transition-colors hover:text-brand-subtle">Cadastre-se</a></li>
               <li><a href="#faq" className="transition-colors hover:text-brand-subtle">Perguntas frequentes</a></li>
-              <li><a href="#" className="transition-colors hover:text-brand-subtle">{t('linkPolitica')}</a></li>
-              <li><a href="#" className="transition-colors hover:text-brand-subtle">{t('linkLgpd')}</a></li>
+              <li><button type="button" className="transition-colors hover:text-brand-subtle">{t('linkPolitica')}</button></li>
+              <li><button type="button" className="transition-colors hover:text-brand-subtle">{t('linkLgpd')}</button></li>
             </ul>
           </nav>
 

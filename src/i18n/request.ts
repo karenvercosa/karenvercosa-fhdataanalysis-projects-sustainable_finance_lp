@@ -9,7 +9,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = routing.defaultLocale;
   }
 
-  // 1. Busca TODO o conteúdo (estático + dinâmico) do banco de dados (Prisma/Redis)
+  // 1. Busca o conteúdo completo (estático + dinâmico) do banco de dados (Prisma/Redis)
   const dbMessages = await getContent(locale.toUpperCase());
 
   return {

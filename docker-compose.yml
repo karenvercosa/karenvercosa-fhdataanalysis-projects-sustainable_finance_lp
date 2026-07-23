@@ -32,32 +32,6 @@ services:
     volumes:
       - redisdata_dev:/data
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin_dev
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    ports:
-      - '5050:80'
-    depends_on:
-      postgres:
-        condition: service_healthy
-
-  migrator:
-    build:
-      context: .
-      dockerfile: Dockerfile.migration
-      args:
-        - DATABASE_URL=${DATABASE_URL_DOCKER}
-    container_name: migrator_sustainable_finance
-    environment:
-      - DATABASE_URL=${DATABASE_URL_DOCKER}
-    depends_on:
-      postgres:
-        condition: service_healthy
-    command: sh -c "npx prisma db push && npx prisma db seed"
 
 volumes:
   pgdata_dev:

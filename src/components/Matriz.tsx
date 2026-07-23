@@ -26,11 +26,63 @@ export function Matriz() {
         </div>
 
         <div className="mt-12 grid items-start gap-6 lg:grid-cols-3">
-          {PATHS.map((path) => {
-            const isContact = path.status === "contact";
+          {PATHS.map((path, i) => {
+            const isContact = i === 2; // path.status === "contact"
+            const isMembro = i === 0; // path.key === "membro"
+            const isAssinatura = i === 1; // path.key === "assinatura"
+
+            // CTA extraído para evitar ternário aninhado (S3358)
+            let cta: React.ReactNode;
+            if (isContact) {
+              cta = (
+                <SponsorButton className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white">
+                  {path.cta}
+                  <ArrowRight className="size-5" strokeWidth={2.2} />
+                </SponsorButton>
+              );
+            } else if (isMembro) {
+              cta = (
+                <a
+                  href={process.env.NEXT_PUBLIC_SIGNUP_URL || "http://localhost:3001"}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
+                >
+                  {path.cta}
+                  <ArrowRight className="size-5" strokeWidth={2.2} />
+                </a>
+              );
+            } else if (isAssinatura) {
+              cta = (
+                <a
+                  href={process.env.NEXT_PUBLIC_SUBSCRIBE_URL || "http://localhost:3001"}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
+                >
+                  {path.cta}
+                  <ArrowRight className="size-5" strokeWidth={2.2} />
+                </a>
+              );
+            } else {
+              cta = (
+                <>
+                  <button
+                    type="button"
+                    disabled
+                    aria-disabled="true"
+                    title="Plataforma em construção — disponível em breve"
+                    className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-sm border border-white/20 bg-white/5 px-6 py-4 text-base font-semibold text-ink-200/70"
+                  >
+                    {path.cta}
+                  </button>
+                  <p className="mt-3 flex items-center justify-center gap-2 text-xs font-medium text-brand-subtle">
+                    <Clock className="size-4" strokeWidth={2} aria-hidden />
+                    {t('emBreve')}
+                  </p>
+                </>
+              );
+            }
+
             return (
               <article
-                key={path.key}
+                key={path.key || i}
                 className={`reveal flex h-full flex-col rounded-lg border bg-brand-900/40 p-8 transition-colors ${
                   path.highlighted ? "border-brand-subtle shadow-cta" : "border-white/15 hover:border-brand-subtle/60"
                 }`}
@@ -68,30 +120,7 @@ export function Matriz() {
                 )}
 
                 {/* CTA */}
-                <div className="mt-8 pt-2">
-                  {isContact ? (
-                    <SponsorButton className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white">
-                      {path.cta}
-                      <ArrowRight className="size-5" strokeWidth={2.2} />
-                    </SponsorButton>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
-                        disabled
-                        aria-disabled="true"
-                        title="Plataforma em construção — disponível em breve"
-                        className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-sm border border-white/20 bg-white/5 px-6 py-4 text-base font-semibold text-ink-200/70"
-                      >
-                        {path.cta}
-                      </button>
-                      <p className="mt-3 flex items-center justify-center gap-2 text-xs font-medium text-brand-subtle">
-                        <Clock className="size-4" strokeWidth={2} aria-hidden />
-                        {t('emBreve')}
-                      </p>
-                    </>
-                  )}
-                </div>
+                <div className="mt-8 pt-2">{cta}</div>
               </article>
             );
           })}

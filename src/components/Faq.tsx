@@ -35,9 +35,8 @@ export function Faq() {
                 >
                   <span className="font-heading text-lg text-brand-900">{item.q}</span>
                   <ChevronDown
-                    className={`size-5 shrink-0 text-brand-500 transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
+                    className={`size-5 shrink-0 text-brand-500 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                      }`}
                     strokeWidth={2}
                   />
                 </button>

@@ -6,19 +6,18 @@ export const EVENT = {
   time: "08h30 às 21h00",
   venue: "Centro Cultural Oscar Niemeyer",
   city: "Goiânia · GO · Brasil",
-  onboardingUrl: "#", // TODO: onboarding Fase 1 da plataforma (em construção)
+  onboardingUrl: "#", // placeholder — onboarding Fase 1 da plataforma (em construção)
   platformReady: false, // enquanto false, cadastro/assinatura ficam "em breve"
   salesEmail: "comercial@sustainablefinance.com.br",
-  whatsapp: "https://wa.me/5562000000000", // TODO: WhatsApp comercial (B2B)
+  whatsapp: "https://wa.me/5562000000000", // placeholder — WhatsApp comercial (B2B)
 };
 
 // Contatos comerciais (fora da plataforma) — B2B / curadoria / patrocínio
-export const CONSULTOR_MAILTO = `mailto:${EVENT.salesEmail}?subject=${encodeURIComponent(
-  "Falar com consultor (B2B) — SFS 2026"
-)}`;
-export const CURADOR_MAILTO = `mailto:${EVENT.salesEmail}?subject=${encodeURIComponent(
-  "Quero ser Curador / Patrocinador — SFS 2026"
-)}`;
+export function mailtoComercial(subject: string) {
+  return `mailto:${EVENT.salesEmail}?subject=${encodeURIComponent(subject)}`;
+}
+export const CONSULTOR_MAILTO = mailtoComercial("Falar com consultor (B2B) — SFS 2026");
+export const CURADOR_MAILTO = mailtoComercial("Quero ser Curador / Patrocinador — SFS 2026");
 
 export const METRICS = [
   { value: "+30", label: "Palestrantes confirmados" },

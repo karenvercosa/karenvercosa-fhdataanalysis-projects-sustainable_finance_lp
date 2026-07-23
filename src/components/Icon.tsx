@@ -30,7 +30,7 @@ const MAP: Record<IconName, LucideIcon> = {
   handshake: HeartHandshake,
 };
 
-export function Icon({ name, className }: { name: IconName; className?: string }) {
+export function Icon({ name, className }: Readonly<{ name: IconName; className?: string }>) {
   const C = MAP[name];
   return <C className={className} strokeWidth={1.8} aria-hidden />;
 }
