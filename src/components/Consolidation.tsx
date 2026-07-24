@@ -1,7 +1,11 @@
+"use client";
 import { Check, Leaf } from "lucide-react";
-import { CONSOLIDATION } from "@/data/content";
+import { CONSOLIDATION as STATIC_CONSOLIDATION } from "@/data/content";
+import { useMessages } from 'next-intl';
 
 export function Consolidation() {
+  const messages = useMessages();
+  const CONSOLIDATION = (messages?.CONSOLIDATION || STATIC_CONSOLIDATION) as typeof STATIC_CONSOLIDATION;
   const { eyebrow, title, bullets, highlights, value } = CONSOLIDATION;
 
   return (

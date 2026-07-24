@@ -1,11 +1,21 @@
+"use client";
+
 import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
-import { EVENT, METRICS } from "@/data/content";
+import { EVENT as STATIC_EVENT, METRICS as STATIC_METRICS } from "@/data/content";
+import { useMessages, useTranslations } from 'next-intl';
 import { SponsorButton } from "@/components/SponsorContact";
 
 export function Hero() {
+  // Pega o objeto de traduções provido pelo next-intl
+  const messages = useMessages();
+  const t = useTranslations('Hero');
+  
+  // Acessa as chaves do seu banco de dados
+  const EVENT = (messages?.EVENT || STATIC_EVENT) as typeof STATIC_EVENT;
+  const METRICS = (messages?.METRICS || STATIC_METRICS) as typeof STATIC_METRICS;
+
   return (
     <section className="relative isolate overflow-hidden bg-brand-900 pt-16 lg:pt-20">
-      {/* Camadas de fundo: arte oficial + overlay verde p/ contraste */}
       <div className="absolute inset-0 -z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/img/hero-art.png" alt="" aria-hidden className="size-full object-cover" />
@@ -14,45 +24,39 @@ export function Hero() {
       </div>
 
       <div className="mx-auto grid max-w-content items-center gap-12 px-4 pb-16 pt-10 sm:px-6 sm:pb-24 sm:pt-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:px-8 lg:pb-28 lg:pt-16">
-        {/* Coluna de texto */}
         <div>
-          {/* Chapéu */}
           <p className="inline-flex items-center gap-2 rounded-full border border-brand-subtle/40 bg-brand-subtle/10 px-4 py-2 text-sm font-medium text-brand-subtle">
             <span className="size-2 animate-pulseDot rounded-full bg-brand-subtle" />
-            2ª edição · Goiânia 2026
+            {t('badge')}
           </p>
-
-          {/* Headline */}
+          
           <h1 className="mt-6 text-display text-white">
-            O maior evento de <span className="text-brand-subtle">finanças sustentáveis</span> do Brasil
+            {t('tituloP1')}<span className="text-brand-subtle">{t('tituloDestaque')}</span>{t('tituloP2')}
           </h1>
-
-          {/* Subheadline */}
+          
           <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-200 sm:text-lg">
-            Onde capital, agronegócio e inovação se encontram para construir a transição verde — com as ferramentas, os
-            dados e as conexões certas para transformar negócios.
+            {t('descricao')}
           </p>
 
-          {/* Data / Horário / Local */}
           <div className="mt-8 grid gap-4 rounded-lg border border-brand-500/40 bg-brand-700/60 p-4 backdrop-blur-sm sm:grid-cols-3 sm:divide-x sm:divide-white/15">
             <div className="flex items-start gap-3 sm:pr-4">
               <CalendarDays className="size-6 shrink-0 text-brand-subtle" strokeWidth={1.8} />
               <div>
-                <p className="text-xs text-ink-200">Data</p>
+                <p className="text-xs text-ink-200">{t('data')}</p>
                 <p className="font-heading font-bold text-white">{EVENT.date}</p>
               </div>
             </div>
             <div className="flex items-start gap-3 sm:px-4">
               <Clock className="size-6 shrink-0 text-brand-subtle" strokeWidth={1.8} />
               <div>
-                <p className="text-xs text-ink-200">Horário</p>
+                <p className="text-xs text-ink-200">{t('horario')}</p>
                 <p className="font-heading font-bold text-white">{EVENT.time}</p>
               </div>
             </div>
             <div className="flex items-start gap-3 sm:pl-4">
               <MapPin className="size-6 shrink-0 text-brand-subtle" strokeWidth={1.8} />
               <div>
-                <p className="text-xs text-ink-200">Local</p>
+                <p className="text-xs text-ink-200">{t('local')}</p>
                 <p className="font-heading font-bold leading-snug text-white">
                   {EVENT.venue}
                   <br />
@@ -62,21 +66,19 @@ export function Hero() {
             </div>
           </div>
 
-          {/* CTAs */}
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
               href="#caminhos"
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-brand-subtle px-8 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
             >
-              Cadastre-se <ArrowRight className="size-5" strokeWidth={2.2} />
+              {t('btnCadastrar')} <ArrowRight className="size-5" strokeWidth={2.2} />
             </a>
             <SponsorButton className="inline-flex items-center justify-center gap-2 rounded-sm border border-brand-subtle px-8 py-4 text-base font-semibold text-brand-subtle transition-colors hover:bg-brand-subtle/10">
-              Seja um patrocinador/curador
+              {t('btnPatrocinador')}
             </SponsorButton>
           </div>
         </div>
 
-        {/* Coluna da imagem oficial (desktop) */}
         <div className="relative hidden lg:block">
           <div className="absolute -inset-4 -z-10 rounded-lg bg-brand-500/20 blur-2xl" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -88,7 +90,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Métricas sociais */}
       <div className="mx-auto max-w-content px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
         <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {METRICS.map((m) => (

@@ -2,19 +2,28 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useLocale, useTranslations } from 'next-intl';
+import { usePathname, useRouter } from '@/i18n/navigation'; // Importado do arquivo de roteamento criado
 
-const LINKS = [
-  { href: "#oportunidade", label: "Sobre" },
-  { href: "#programacao", label: "Conteúdo" },
-  { href: "#publico", label: "Para quem é" },
-  { href: "#conducao", label: "Condução" },
-  { href: "#caminhos", label: "Como participar" },
-  { href: "#faq", label: "FAQ" },
+const getLinks = (t: any) => [
+  { href: "#oportunidade", label: t('sobre') },
+  { href: "#programacao", label: t('conteudo') },
+  { href: "#publico", label: t('paraQuemE') },
+  { href: "#conducao", label: t('conducao') },
+  { href: "#caminhos", label: t('comoParticipar') },
+  { href: "#faq", label: t('faq') },
 ];
 
 export function Header() {
+  const t = useTranslations('Header');
+  const LINKS = getLinks(t);
+
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -22,6 +31,11 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const changeLanguage = (newLocale: "pt" | "en") => {
+    // Substitui a rota mantendo o path atual, mas trocando a linguagem
+    router.replace(pathname, { locale: newLocale });
+  };
 
   return (
     <header id="topo" className="fixed inset-x-0 top-0 z-40">
@@ -31,13 +45,11 @@ export function Header() {
         }`}
       >
         <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
-          {/* Logo oficial */}
-          <a href="#topo" aria-label="Sustainable Finance — início" className="shrink-0">
+          <a href="#topo" aria-label="Sustainable Finance Início" className="shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/img/logo-sfs.svg" alt="Sustainable Finance 2026" width={160} height={57} className="h-10 w-auto lg:h-12" />
           </a>
 
-          {/* Links desktop */}
           <div className="hidden items-center gap-8 text-sm font-medium text-white lg:flex">
             {LINKS.map((l) => (
               <a key={l.href} href={l.href} className="transition-colors hover:text-brand-subtle">
@@ -46,14 +58,30 @@ export function Header() {
             ))}
           </div>
 
-          {/* Ações */}
           <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 text-sm font-semibold text-white mr-2">
+              <button
+                onClick={() => changeLanguage("pt")}
+                className={`transition-colors hover:text-brand-subtle ${locale === "pt" ? "text-brand-subtle" : ""}`}
+              >
+                PT
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                onClick={() => changeLanguage("en")}
+                className={`transition-colors hover:text-brand-subtle ${locale === "en" ? "text-brand-subtle" : ""}`}
+              >
+                EN
+              </button>
+            </div>
+
             <a
               href="#caminhos"
               className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-brand-subtle px-3 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-colors hover:bg-white sm:px-4"
             >
-              Cadastre-se
+              {t('cadastreSe')}
             </a>
+
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -80,12 +108,33 @@ export function Header() {
                   {l.label}
                 </a>
               ))}
+              <div className="mt-2 flex items-center justify-center gap-2 text-sm font-semibold text-white">
+                <button
+                  onClick={() => {
+                    changeLanguage("pt");
+                    setOpen(false);
+                  }}
+                  className={`transition-colors ${locale === "pt" ? "text-brand-subtle" : ""}`}
+                >
+                  PT
+                </button>
+                <span className="text-white/30">|</span>
+                <button
+                  onClick={() => {
+                    changeLanguage("en");
+                    setOpen(false);
+                  }}
+                  className={`transition-colors ${locale === "en" ? "text-brand-subtle" : ""}`}
+                >
+                  EN
+                </button>
+              </div>
               <a
                 href="#caminhos"
                 onClick={() => setOpen(false)}
                 className="mt-2 rounded-sm bg-brand-subtle px-3 py-3 text-center font-semibold text-brand-900"
               >
-                Cadastre-se
+                {t('cadastreSe')}
               </a>
             </div>
           </div>

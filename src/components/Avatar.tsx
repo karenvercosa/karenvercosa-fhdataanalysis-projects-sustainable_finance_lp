@@ -10,10 +10,10 @@ const TINTS = [
 
 function initials(name: string) {
   const parts = name.trim().split(/\s+/);
-  return ((parts[0]?.[0] ?? "") + (parts[parts.length - 1]?.[0] ?? "")).toUpperCase();
+  return ((parts[0]?.[0] ?? "") + (parts.at(-1)?.[0] ?? "")).toUpperCase();
 }
 
-export function Avatar({ name }: { name: string }) {
+export function Avatar({ name }: Readonly<{ name: string }>) {
   const tint = TINTS[name.length % TINTS.length];
   return (
     <div

@@ -2,9 +2,13 @@
 
 import { useState } from "react";
 import { ChevronDown, Leaf } from "lucide-react";
-import { TRILHAS } from "@/data/content";
+import { TRILHAS as STATIC_TRILHAS } from "@/data/content";
+import { useMessages, useTranslations } from 'next-intl';
 
 export function Programacao() {
+  const messages = useMessages();
+  const t = useTranslations('Programacao');
+  const TRILHAS = (messages?.TRILHAS || STATIC_TRILHAS) as typeof STATIC_TRILHAS;
   // Accordion de trilhas — independentes; a primeira abre por padrão.
   const [open, setOpen] = useState<Record<number, boolean>>({ 1: true });
   const toggle = (n: number) => setOpen((s) => ({ ...s, [n]: !s[n] }));
@@ -13,11 +17,10 @@ export function Programacao() {
     <section id="programacao" className="bg-brand-900 py-20 text-white lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">Programação</p>
-          <h2 className="mt-4 font-heading text-3xl text-white sm:text-4xl">Trilhas de conteúdo</h2>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">{t('badge')}</p>
+          <h2 className="mt-4 font-heading text-3xl text-white sm:text-4xl">{t('titulo')}</h2>
           <p className="mt-4 text-lg text-ink-200">
-            Quatro trilhas temáticas cobrindo capital, regulação, inovação, descarbonização e bioeconomia. Toque para
-            explorar os painéis de cada uma.
+            {t('descricao')}
           </p>
         </div>
 
@@ -36,7 +39,7 @@ export function Programacao() {
                     <Leaf className="size-5" strokeWidth={2} aria-hidden />
                   </span>
                   <span className="flex-1">
-                    <span className="text-sm font-semibold text-brand-subtle">Trilha {trilha.n}</span>
+                    <span className="text-sm font-semibold text-brand-subtle">{t('trilha')} {trilha.n}</span>
                     <span className="block font-heading text-lg text-white sm:text-xl">{trilha.title}</span>
                   </span>
                   <ChevronDown

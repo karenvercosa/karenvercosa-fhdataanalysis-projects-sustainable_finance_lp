@@ -3,9 +3,13 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
-import { SPEAKERS } from "@/data/content";
+import { SPEAKERS as STATIC_SPEAKERS } from "@/data/content";
+import { useMessages, useTranslations } from 'next-intl';
 
 export function Speakers() {
+  const messages = useMessages();
+  const t = useTranslations('Speakers');
+  const SPEAKERS = (messages?.SPEAKERS || STATIC_SPEAKERS) as typeof STATIC_SPEAKERS;
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? SPEAKERS : SPEAKERS.filter((s) => s.featured);
 
@@ -13,11 +17,10 @@ export function Speakers() {
     <section id="palestrantes" className="bg-ink-50 py-20 lg:py-32">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">Quem você vai encontrar</p>
-          <h2 className="mt-4 font-heading text-3xl text-brand-900 sm:text-4xl">Keynote Speakers</h2>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-500">{t('badge')}</p>
+          <h2 className="mt-4 font-heading text-3xl text-brand-900 sm:text-4xl">{t('titulo')}</h2>
           <p className="mt-4 text-lg text-ink-600">
-            Líderes globais da economia, da regulação climática e do mercado financeiro confirmados para o palco
-            principal.
+            {t('descricao')}
           </p>
         </div>
 
@@ -43,7 +46,7 @@ export function Speakers() {
             aria-expanded={showAll}
             className="inline-flex items-center gap-2 rounded-sm border border-brand-500 px-8 py-4 text-base font-semibold text-brand-500 transition-colors hover:bg-brand-500 hover:text-white"
           >
-            {showAll ? "Mostrar menos" : "Visualizar todos os palestrantes"}
+            {showAll ? t('mostrarMenos') : t('mostrarTodos')}
             <ChevronDown className={`size-5 transition-transform ${showAll ? "rotate-180" : ""}`} strokeWidth={2} />
           </button>
         </div>

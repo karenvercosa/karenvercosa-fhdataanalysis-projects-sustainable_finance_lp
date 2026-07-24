@@ -1,9 +1,16 @@
+"use client";
 import { Check, ArrowRight, Clock } from "lucide-react";
 import { Icon } from "@/components/Icon";
-import { PATHS } from "@/data/content";
+import { PATHS as STATIC_PATHS } from "@/data/content";
+import { useMessages, useTranslations } from 'next-intl';
 import { SponsorButton } from "@/components/SponsorContact";
+import { Link } from "@/i18n/navigation";
 
 export function Matriz() {
+  const messages = useMessages();
+  const t = useTranslations('Matriz');
+  const PATHS = (messages?.PATHS || STATIC_PATHS) as typeof STATIC_PATHS;
+
   return (
     <section id="caminhos" className="relative isolate overflow-hidden bg-brand-700 py-20 text-white lg:py-32">
       <div className="hero-grid absolute inset-0 -z-10 opacity-60" />
@@ -11,21 +18,72 @@ export function Matriz() {
 
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="reveal mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">Como participar</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-subtle">{t('badge')}</p>
           <h2 className="mt-4 font-heading text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-            Escolha o seu caminho no ecossistema
+            {t('titulo')}
           </h2>
           <p className="mt-4 text-lg text-ink-200">
-            Tudo começa entrando na plataforma. Escolha o nível de acesso ideal para você — do gratuito ao estratégico.
+            {t('descricao')}
           </p>
         </div>
 
         <div className="mt-12 grid items-start gap-6 lg:grid-cols-3">
-          {PATHS.map((path) => {
-            const isContact = path.status === "contact";
+          {PATHS.map((path, i) => {
+            const isContact = i === 2; // path.status === "contact"
+            const isMembro = i === 0; // path.key === "membro"
+            const isAssinatura = i === 1; // path.key === "assinatura"
+
+            let cta: React.ReactNode;
+            if (isContact) {
+              cta = (
+                <SponsorButton className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white">
+                  {path.cta}
+                  <ArrowRight className="size-5" strokeWidth={2.2} />
+                </SponsorButton>
+              );
+            } else if (isMembro){
+              cta = (
+                <Link
+                  href="/cadastro"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
+                >
+                  {path.cta}
+                  <ArrowRight className="size-5" strokeWidth={2.2} />
+                </Link>
+              );
+            } else if (isAssinatura){
+              cta = (
+                <Link
+                  href="/assinar"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white"
+                >
+                  {path.cta}
+                  <ArrowRight className="size-5" strokeWidth={2.2} />
+                </Link>
+              );
+            } else {
+              cta = (
+                <>
+                  <button
+                    type="button"
+                    disabled
+                    aria-disabled="true"
+                    title="Plataforma em construção — disponível em breve"
+                    className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-sm border border-white/20 bg-white/5 px-6 py-4 text-base font-semibold text-ink-200/70"
+                  >
+                    {path.cta}
+                  </button>
+                  <p className="mt-3 flex items-center justify-center gap-2 text-xs font-medium text-brand-subtle">
+                    <Clock className="size-4" strokeWidth={2} aria-hidden />
+                    {t('emBreve')}
+                  </p>
+                </>
+              );
+            }
+
             return (
               <article
-                key={path.key}
+                key={path.key || i}
                 className={`reveal flex h-full flex-col rounded-lg border bg-brand-900/40 p-8 transition-colors ${
                   path.highlighted ? "border-brand-subtle shadow-cta" : "border-white/15 hover:border-brand-subtle/60"
                 }`}
@@ -63,30 +121,7 @@ export function Matriz() {
                 )}
 
                 {/* CTA */}
-                <div className="mt-8 pt-2">
-                  {isContact ? (
-                    <SponsorButton className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-subtle px-6 py-4 text-base font-semibold text-brand-900 shadow-cta transition-all hover:-translate-y-0.5 hover:bg-white">
-                      {path.cta}
-                      <ArrowRight className="size-5" strokeWidth={2.2} />
-                    </SponsorButton>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
-                        disabled
-                        aria-disabled="true"
-                        title="Plataforma em construção — disponível em breve"
-                        className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-sm border border-white/20 bg-white/5 px-6 py-4 text-base font-semibold text-ink-200/70"
-                      >
-                        {path.cta}
-                      </button>
-                      <p className="mt-3 flex items-center justify-center gap-2 text-xs font-medium text-brand-subtle">
-                        <Clock className="size-4" strokeWidth={2} aria-hidden />
-                        Plataforma em construção — em breve
-                      </p>
-                    </>
-                  )}
-                </div>
+                <div className="mt-8 pt-2">{cta}</div>
               </article>
             );
           })}
