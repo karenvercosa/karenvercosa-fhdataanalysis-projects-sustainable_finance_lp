@@ -14,7 +14,7 @@ export function CartaoStep({
   submitting,
   errorMsg,
   onPagar,
-}: {
+}: Readonly<{
   card: CartaoData;
   onCardChange: (k: keyof CartaoData) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   titular: TitularData;
@@ -22,7 +22,7 @@ export function CartaoStep({
   submitting: boolean;
   errorMsg: string | null;
   onPagar: () => void;
-}) {
+}>) {
   const t = useTranslations("Assinatura");
 
   return (

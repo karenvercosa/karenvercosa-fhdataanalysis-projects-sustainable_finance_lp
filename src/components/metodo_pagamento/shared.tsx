@@ -24,11 +24,11 @@ export function Wrapper({
   showPopup,
   popupText,
   children,
-}: {
+}: Readonly<{
   showPopup: boolean;
   popupText: string;
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <div className="relative flex min-h-screen items-center justify-center p-4">
       <img src="/img/login-bg.png" alt="" className="absolute inset-0 h-full w-full object-cover" />
@@ -47,10 +47,10 @@ export function Wrapper({
   );
 }
 
-export function Header({ titulo }: { titulo: string }) {
+export function Header({ titulo }: Readonly<{ titulo: string }>) {
   return (
     <div className="flex flex-col items-center gap-2 text-center">
-      <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-12 w-auto" />
+      <img src="/img/logo-sfs.svg" alt="Sustainable Finance" width={160} height={57} className="h-12 w-auto" />
       <h1 className="text-h2 text-white font-heading">{titulo}</h1>
     </div>
   );
@@ -61,12 +61,12 @@ export function PlanoCard({
   desc,
   valor,
   mes,
-}: {
+}: Readonly<{
   nome: string;
   desc: string;
   valor: string;
   mes: string;
-}) {
+}>) {
   return (
     <div className="rounded-md border border-white/15 bg-white/5 p-4">
       <p className="text-h5 text-[#8DD596]">{nome}</p>

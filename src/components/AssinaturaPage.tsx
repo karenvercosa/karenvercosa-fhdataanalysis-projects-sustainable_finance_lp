@@ -2,15 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "@/i18n/navigation";
-import { CheckCircle2, ArrowRight, QrCode, Barcode, CreditCard } from "lucide-react";
+import { ArrowRight, QrCode, Barcode, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { Wrapper, Header, PlanoCard, field, type CartaoData, type TitularData } from "./metodo_pagamento/shared";
 import { PixStep } from "./metodo_pagamento/PixStep";
 import { CartaoStep } from "./metodo_pagamento/CartaoStep";
 import { BoletoStep } from "./metodo_pagamento/BoletoStep";
+import { SuccessCard } from "./ui/SuccessCard";
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const SENHA_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
 
 // Máscara de CPF: aceita só dígitos (máx. 11) e formata como xxx.xxx.xxx-xx.
@@ -93,7 +94,7 @@ export default function AssinaturaPage() {
     };
   }, [step, paymentId]);
 
-  const iniciar = async (e: React.FormEvent) => {
+  const iniciar = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!dadosValidos || submitting) return;
     setSubmitting(true);
@@ -180,22 +181,7 @@ export default function AssinaturaPage() {
   if (step === "sucesso") {
     return (
       <Wrapper showPopup={popup} popupText={popupText}>
-        <div className="flex animate-in fade-in zoom-in-95 flex-col items-center gap-4 py-6 text-center duration-300">
-          <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-12 w-auto" />
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-[#8DD596]">
-            <CheckCircle2 className="h-8 w-8" />
-          </div>
-          <div className="space-y-2">
-            <h2 className="text-h2 font-heading text-white">{t("sucessoTitulo")}</h2>
-            <p className="text-body text-white/80">{t("sucessoDesc")}</p>
-          </div>
-        </div>
-        <Link
-          href="/"
-          className="flex w-full items-center justify-center gap-2 rounded-sm bg-[#8DD596] px-6 py-3 font-semibold text-[#102823] transition-all hover:brightness-110 active:brightness-95"
-        >
-          {t("btnVoltarInicio")}
-        </Link>
+        <SuccessCard title={t("sucessoTitulo")} desc={t("sucessoDesc")} btnText={t("btnVoltarInicio")} />
       </Wrapper>
     );
   }

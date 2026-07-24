@@ -4,12 +4,12 @@ import { LEGAL_DOCS, LEGAL_ORDER, type LegalDocId } from "@/data/legal";
 import { cn } from "@/lib/utils";
 
 // Mock Button
-function Button({ children, onClick, variant = "primary" }: { children: ReactNode; onClick?: () => void; variant?: string }) {
+function Button({ children, onClick, variant = "primary" }: Readonly<{ children: ReactNode; onClick?: () => void; variant?: string }>) {
   return <button type="button" onClick={onClick} className={cn("px-4 py-2 rounded-md font-medium text-sm transition-colors", variant === "outline" ? "border border-neutral-300 hover:bg-neutral-100 text-neutral-700" : "bg-[#8DD596] text-[#102823] hover:brightness-110")}>{children}</button>;
 }
 
 // Mock Modal
-function Modal({ open, onClose, title, children, footer, className }: { open: boolean; onClose: () => void; title: string; children: ReactNode; footer?: ReactNode; className?: string }) {
+function Modal({ open, onClose, title, children, footer, className }: Readonly<{ open: boolean; onClose: () => void; title: string; children: ReactNode; footer?: ReactNode; className?: string }>) {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
@@ -38,17 +38,17 @@ export function LegalModal({
   open,
   onClose,
   docInicial = "termos"
-}: {
+}: Readonly<{
   open: boolean;
   onClose: () => void;
   docInicial?: LegalDocId;
-}) {
+}>) {
   const [atual, setAtual] = useState<LegalDocId>(docInicial);
   const revisar = () => {};
   const doc = LEGAL_DOCS[atual];
 
   // O modal fica montado, então `docInicial` precisa ser reaplicado a cada
-  // abertura — senão todo clique cai no documento da primeira montagem.
+  // abertura — senão qualquer clique cai no documento da primeira montagem.
   useEffect(() => {
     if (open) setAtual(docInicial);
   }, [open, docInicial]);
@@ -108,7 +108,7 @@ export function LegalModal({
             <section key={s.heading} className="space-y-1.5">
               <h3 className="text-h5 text-neutral-900">{s.heading}</h3>
               {s.body.map((p, i) => (
-                <p key={i} className="text-body-sm leading-relaxed text-neutral-700">
+                <p key={`${p.substring(0, 20)}-${i}`} className="text-body-sm leading-relaxed text-neutral-700">
                   {p}
                 </p>
               ))}

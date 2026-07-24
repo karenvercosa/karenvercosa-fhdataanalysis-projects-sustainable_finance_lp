@@ -1,10 +1,11 @@
 # Use Node.js LTS (22) base image
 FROM node:22-alpine AS base
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+# Added openssl here so it's available in all stages (deps, builder, runner)
+RUN apk add --no-cache libc6-compat openssl
 
 # 1. Install dependencies only when needed
 FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
@@ -25,6 +26,10 @@ RUN npx prisma generate
 
 # Next.js telemetry is disabled
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Provide dummy variables for Next.js build (collecting page data)
+ENV RESEND_API_KEY="re_12345678"
+ENV BETTER_AUTH_SECRET="dummy-secret-32-chars-for-build-123456"
 
 # Build the Next.js application
 RUN yarn build

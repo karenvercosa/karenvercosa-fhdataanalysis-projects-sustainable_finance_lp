@@ -13,9 +13,9 @@ import {
 // Valor mensal do plano da plataforma (R$).
 const VALOR_MENSAL = 300;
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const SENHA_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
-const BILLING_VALIDOS: BillingType[] = ["PIX", "CREDIT_CARD", "BOLETO"];
+const BILLING_VALIDOS = new Set<BillingType>(["PIX", "CREDIT_CARD", "BOLETO"]);
 
 export async function POST(req: Request) {
   try {
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     if (!SENHA_REGEX.test(password || "")) {
       return NextResponse.json({ error: "Senha não atende aos requisitos." }, { status: 400 });
     }
-    if (!BILLING_VALIDOS.includes(billingType)) {
+    if (!BILLING_VALIDOS.has(billingType)) {
       return NextResponse.json({ error: "Método de pagamento inválido." }, { status: 400 });
     }
     // CPF é exigido pelo Asaas para gerar a cobrança (apenas CPF, sem CNPJ).
@@ -40,37 +40,11 @@ export async function POST(req: Request) {
     const emailNorm = String(email).trim().toLowerCase();
 
     // 2. Cria o usuário na plataforma (Better Auth).
-    // Se o e-mail já existe (ex.: retomando um pagamento que falhou antes),
-    // validamos a senha e reaproveitamos a conta em vez de dar erro.
     let userId: string;
     try {
-      const signUp = await auth.api.signUpEmail({
-        body: { email: emailNorm, password, name: String(name).trim() },
-      });
-      userId = signUp.user.id;
+      userId = await getOrCreateUser(emailNorm, String(name).trim(), password);
     } catch (e: any) {
-      const msg = e?.message || "";
-      const jaExiste = /exist|já.*cadastr|already/i.test(msg);
-      if (!jaExiste) {
-        return NextResponse.json({ error: msg || "Não foi possível criar a conta." }, { status: 400 });
-      }
-      // E-mail já cadastrado: confere a senha antes de reaproveitar a conta.
-      try {
-        await auth.api.signInEmail({ body: { email: emailNorm, password } });
-      } catch {
-        return NextResponse.json(
-          { error: "Este e-mail já está cadastrado. Verifique a senha e tente novamente." },
-          { status: 400 },
-        );
-      }
-      const existente = await prisma.usuario.findUnique({
-        where: { email: emailNorm },
-        select: { id: true },
-      });
-      if (!existente) {
-        return NextResponse.json({ error: "Conta não encontrada." }, { status: 400 });
-      }
-      userId = existente.id;
+      return NextResponse.json({ error: e.message }, { status: 400 });
     }
 
     // Salva o telefone e o CPF no cadastro. O CPF é guardado MASCARADO por
@@ -145,5 +119,33 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error("[assinatura/iniciar]", error);
     return NextResponse.json({ error: error?.message || "Erro ao iniciar assinatura." }, { status: 500 });
+  }
+}
+
+async function getOrCreateUser(emailNorm: string, name: string, password?: string): Promise<string> {
+  try {
+    const signUp = await auth.api.signUpEmail({
+      body: { email: emailNorm, password: password || "", name },
+    });
+    return signUp.user.id;
+  } catch (e: any) {
+    const msg = e?.message || "";
+    const jaExiste = /exist|já.*cadastr|already/i.test(msg);
+    if (!jaExiste) {
+      throw new Error(msg || "Não foi possível criar a conta.");
+    }
+    try {
+      await auth.api.signInEmail({ body: { email: emailNorm, password: password || "" } });
+    } catch {
+      throw new Error("Este e-mail já está cadastrado. Verifique a senha e tente novamente.");
+    }
+    const existente = await prisma.usuario.findUnique({
+      where: { email: emailNorm },
+      select: { id: true },
+    });
+    if (!existente) {
+      throw new Error("Conta não encontrada.");
+    }
+    return existente.id;
   }
 }

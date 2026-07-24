@@ -9,7 +9,7 @@ import { Header, field } from "./shared";
 type BoletoData = { bankSlipUrl?: string; identificationField?: string };
 
 /** Etapa de pagamento via Boleto: linha digitável + PDF, aguardando compensação. */
-export function BoletoStep({ boleto }: { boleto: BoletoData | null }) {
+export function BoletoStep({ boleto }: Readonly<{ boleto: BoletoData | null }>) {
   const t = useTranslations("Assinatura");
 
   return (

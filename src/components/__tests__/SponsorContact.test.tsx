@@ -1,5 +1,5 @@
-import { render, screen, fireEvent, renderHook } from '@testing-library/react';
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { render, screen, fireEvent, renderHook, act, waitFor } from '@testing-library/react';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { NextIntlClientProvider } from 'next-intl';
 import ptMessages from '@/messages/pt.json';
 import {
@@ -17,21 +17,12 @@ function Wrapper({ children }: { children: React.ReactNode }) {
 }
 
 describe('SponsorContact', () => {
-  const realLocation = window.location;
-
   beforeEach(() => {
-    Object.defineProperty(window, 'location', {
-      value: { href: '' },
-      writable: true,
-      configurable: true,
-    });
+    vi.useFakeTimers();
   });
   afterEach(() => {
-    Object.defineProperty(window, 'location', {
-      value: realLocation,
-      writable: true,
-      configurable: true,
-    });
+    vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
   it('useSponsorModal lança erro fora do provider', () => {
@@ -51,7 +42,13 @@ describe('SponsorContact', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
-  it('envia o lead por mailto e mostra o estado de sucesso', () => {
+  it('envia o lead via API e mostra o estado de sucesso', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true }),
+    });
+    global.fetch = fetchMock;
+
     const { container } = render(
       <Wrapper>
         <SponsorButton>Abrir</SponsorButton>
@@ -65,12 +62,27 @@ describe('SponsorContact', () => {
     fireEvent.change(inputs[2], { target: { value: 'ACME' } });
 
     const form = container.querySelector('form')!;
-    fireEvent.submit(form);
+    
+    await act(async () => {
+      fireEvent.submit(form);
+    });
 
-    expect(window.location.href).toContain(
-      'mailto:comercial@sustainablefinance.com.br',
-    );
-    // O formulário some e aparece o estado de sucesso (sem <form>).
+    expect(fetchMock).toHaveBeenCalledWith('/api/patrocinador', expect.objectContaining({
+      method: 'POST',
+      body: JSON.stringify({
+        nome: 'Fulano',
+        email: 'fulano@acme.com',
+        empresa: 'ACME',
+        cargo: '',
+        telefone: ''
+      })
+    }));
+
+    // O formulário some após o fetch, mas o estado real de sucesso demora 2200ms
+    act(() => {
+      vi.advanceTimersByTime(2200);
+    });
+
     expect(container.querySelector('form')).toBeNull();
   });
 

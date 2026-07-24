@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { sendSponsorLeadEmail } from "@/services/email.service";
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 export async function POST(req: Request) {
   try {

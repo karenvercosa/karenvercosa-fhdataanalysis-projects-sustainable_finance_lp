@@ -31,5 +31,20 @@ describe('Header', () => {
     const toggle = screen.getByRole('button', { name: 'Abrir menu' });
     fireEvent.click(toggle);
     expect(screen.getByRole('button', { name: 'Fechar menu' })).toBeInTheDocument();
+    
+    // clica no EN mobile
+    const enMobile = screen.getAllByRole('button', { name: 'EN' })[1];
+    fireEvent.click(enMobile);
+    expect(replace).toHaveBeenCalledWith('/', { locale: 'en' });
+    
+    // abre de novo
+    fireEvent.click(screen.getByRole('button', { name: 'Abrir menu' }));
+    
+    // clica num link (por exemplo, "Cadastre-se")
+    const cadastre = screen.getAllByText('Cadastre-se')[1];
+    fireEvent.click(cadastre);
+    
+    // deve fechar
+    expect(screen.queryByRole('button', { name: 'Fechar menu' })).not.toBeInTheDocument();
   });
 });

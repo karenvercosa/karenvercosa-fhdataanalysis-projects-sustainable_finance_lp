@@ -13,11 +13,11 @@ export function PixStep({
   pix,
   copied,
   onCopy,
-}: {
+}: Readonly<{
   pix: PixData | null;
   copied: boolean;
   onCopy: () => void;
-}) {
+}>) {
   const t = useTranslations("Assinatura");
 
   return (

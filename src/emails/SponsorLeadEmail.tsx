@@ -24,7 +24,7 @@ export interface SponsorLeadEmailProps {
  * E-mail enviado ao time comercial quando alguém preenche o formulário
  * "Quero ser Curador / Patrocinador" (na landing page ou no cadastro).
  */
-export function SponsorLeadEmail({ nome, email, empresa, cargo, telefone }: SponsorLeadEmailProps) {
+export function SponsorLeadEmail({ nome, email, empresa, cargo, telefone }: Readonly<SponsorLeadEmailProps>) {
   const linhas: Array<{ rotulo: string; valor?: string }> = [
     { rotulo: "Nome", valor: nome },
     { rotulo: "E-mail", valor: email },

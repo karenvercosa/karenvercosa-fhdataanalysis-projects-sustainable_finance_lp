@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "@/i18n/navigation";
-import { ShieldCheck, ArrowRight, Sparkles, Building2, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, ArrowRight, Sparkles, Building2 } from "lucide-react";
 import { useInterests } from "@/components/context/InterestsContext";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { LegalModal } from "@/components/legal/LegalModal";
+import { SuccessCard } from "@/components/ui/SuccessCard";
 import { CONSENTIMENTO_KEY, type LegalDocId } from "@/data/legal";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
@@ -15,7 +16,7 @@ import { useTranslations } from "next-intl";
 type Phase1Data = { firstName: string; lastName: string; email: string; phone: string; password: string; };
 
 // E-mail precisa obrigatoriamente ter "@" e um domínio válido.
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 // Senha: mínimo 8 caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 caractere especial.
 const SENHA_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
 
@@ -75,7 +76,7 @@ export default function RegisterPage() {
     form.phone.trim().length >= 8 &&
     aceiteTermos;
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!valid || submitting) return;
 
@@ -138,22 +139,7 @@ export default function RegisterPage() {
       <div className="relative flex min-h-screen items-center justify-center p-4">
         <img src="/img/login-bg.png" alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="relative z-10 w-full max-w-md space-y-6 rounded-md bg-[rgba(25,48,43,0.92)] p-6 backdrop-blur-sm shadow-xl">
-          <div className="flex animate-in fade-in zoom-in-95 flex-col items-center gap-4 py-6 text-center duration-300">
-            <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-12 w-auto" />
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-[#8DD596]">
-              <CheckCircle2 className="h-8 w-8" />
-            </div>
-            <div className="space-y-2">
-              <h2 className="text-h2 font-heading text-white">{t("sucessoTitulo")}</h2>
-              <p className="text-body text-white/80">{t("sucessoDesc")}</p>
-            </div>
-          </div>
-          <Link
-            href="/"
-            className="flex w-full items-center justify-center gap-2 rounded-sm bg-[#8DD596] px-6 py-3 font-semibold text-[#102823] transition-all hover:brightness-110 active:brightness-95"
-          >
-            {t("btnVoltarInicio")}
-          </Link>
+          <SuccessCard title={t("sucessoTitulo")} desc={t("sucessoDesc")} btnText={t("btnVoltarInicio")} />
         </div>
       </div>
     );
@@ -167,7 +153,7 @@ export default function RegisterPage() {
         className="relative z-10 w-full max-w-md space-y-6 rounded-md bg-[rgba(25,48,43,0.92)] p-6 backdrop-blur-sm shadow-xl"
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <img src="/img/logo-sfs.svg" alt="Sustainable Finance" className="h-12 w-auto" />
+          <img src="/img/logo-sfs.svg" alt="Sustainable Finance" width={160} height={57} className="h-12 w-auto" />
           <h1 className="text-h2 text-white font-heading">{t('titulo')}</h1>
           <p className="text-body text-white/80">{t('subtitulo')}</p>
         </div>
@@ -312,8 +298,7 @@ export default function RegisterPage() {
                     {t('termos2')}{" "}
                     <button type="button" onClick={() => setLegalDoc("privacidade")} className="font-medium underline hover:text-white">
                       {t('privacidadeLink')}
-                    </button>
-                    .
+                    </button>.
                   </>
                 }
               />

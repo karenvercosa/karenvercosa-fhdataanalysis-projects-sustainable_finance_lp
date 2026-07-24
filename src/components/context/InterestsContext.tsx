@@ -17,22 +17,23 @@ const SEED = [
 
 const InterestsContext = createContext<InterestsState | null>(null);
 
-export function InterestsProvider({ children }: { children: ReactNode }) {
+export function InterestsProvider({ children }: Readonly<{ children: ReactNode }>) {
   const [interests, setInterests] = useState<string[]>(SEED);
 
+  const add = (name: string) => {
+    const v = name.trim();
+    if (!v) return;
+    setInterests((prev: string[]) =>
+      prev.some((i: string) => i.toLowerCase() === v.toLowerCase()) ? prev : [...prev, v]
+    );
+  };
+
+  const remove = (name: string) => setInterests((prev: string[]) => prev.filter((i: string) => i !== name));
+
   const value = useMemo<InterestsState>(
-    () => ({
-      interests,
-      add: (name) => {
-        const v = name.trim();
-        if (!v) return;
-        setInterests((prev: string[]) =>
-          prev.some((i: string) => i.toLowerCase() === v.toLowerCase()) ? prev : [...prev, v]
-        );
-      },
-      remove: (name) => setInterests((prev: string[]) => prev.filter((i: string) => i !== name))
-    }),
-    [interests, setInterests]
+    () => ({ interests, add, remove }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [interests]
   );
 
   return <InterestsContext.Provider value={value}>{children}</InterestsContext.Provider>;
